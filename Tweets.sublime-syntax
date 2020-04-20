@@ -7,7 +7,7 @@ file_extensions:
 scope: tweet.text
 
 variables:
-  url_start: "((?=[^/\\\"'!=A-Z0-9_@＠$#＃\\.-])|^)"
+  url_start: "(^|(?<![/\"'!=A-Z0-9_@\\x{0000ff20}$#\\x{0000ff03}\\.-]))"
   url_http: "(https?://)"
   url_domain_valid: "[^\\s!\\\"#$%&'()*+,./:;<=>?@\\[\\]^_`{|}~-]"
   url_domain: "({{url_subdomain}}*{{url_lastdomain}}({{url_gTLD}}|{{url_ccTLD}}|{{url_punycode}}))"
@@ -23,15 +23,16 @@ variables:
       (?=[^a-z]|$))"
   url_punycode: "(xn--[0-9a-z]+)"
   url_port: "(:[0-9]+?)"
-  latin_accents: "\\xc0-\\xd6\\xd8-\\xf6\\xf8-\\xff\\x{0100}-\\x{024f}\\x{0253}-\\x{0254}\\x{0256}\\x{0257}\\x{0259}\\x{025b}\\x{0263}\\x{0268}\\x{026f}\\x{0272}\\x{0289}\\x{028b}\\x{02bb}\\x{1e00}-\\x{1eff}"
-  valid_general_url_path_chars: "([a-z0-9!*';:=+,.$/%%#\\[\\]_~&-]|[{{latin_accents}}])"
+  latin_accents: "[\\\\xc0-\\\\xd6\\\\xd8-\\\\xf6\\\\xf8-\\\\xff\\x{00000100}-\\x{0000024f}\\x{00000253}-\\x{00000254}\\x{00000256}\\x{00000257}\\x{00000259}\\x{0000025b}\\x{00000263}\\x{00000268}\\x{0000026f}\\x{00000272}\\x{00000289}\\x{0000028b}\\x{000002bb}\\x{00001e00}-\\x{00001eff}]"
+  valid_general_url_path_chars: "([a-z0-9!*';:=+,.$/%%#\\[\\]_~&-]|{{latin_accents}})"
   valid_url_balanced_parens: "(\\({{valid_general_url_path_chars}}+\\))"
-  valid_url_path_ending_chars: "[a-z0-9=_#/+{{latin_accents}}-]|{{valid_url_balanced_parens}}"
+  valid_url_path_ending_chars: "[a-z0-9=_#/+-]|{{latin_accents}}|{{valid_url_balanced_parens}}"
   url_path: "(({{valid_general_url_path_chars}}*({{valid_url_balanced_parens}}{{valid_general_url_path_chars}}*)*{{valid_url_path_ending_chars}})|(@{{valid_general_url_path_chars}}+/))"
   valid_url_query_chars: "[a-z0-9!?*'();:&=+$/%#\\[\\]_.|~,-]"
   valid_url_query_ending_chars: "[a-z0-9_&=#/]"
-  url_query: "({{valid_url_query_chars}}*{{valid_url_query_ending_chars}})"
-  url: "{{url_start}}{{url_http}}?{{url_domain}}{{url_port}}?{{url_path}}?{{url_query}}?"
+  url_query: "(\\?{{valid_url_query_chars}}*{{valid_url_query_ending_chars}})"
+  url: "(?i){{url_start}}{{url_http}}?{{url_domain}}{{url_port}}?{{url_path}}?{{url_query}}?"
+  url_debug: "(?i){{url_start}}{{url_path}}?"
 
 contexts:
   prototype:
@@ -52,1618 +53,1680 @@ contexts:
   tweet280:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet258
+      set: tweet257
     - match: '.|\n'
       set: tweet279
   tweet279:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet257
+      set: tweet256
     - match: '.|\n'
       set: tweet278
   tweet278:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet256
+      set: tweet255
     - match: '.|\n'
       set: tweet277
   tweet277:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet255
+      set: tweet254
     - match: '.|\n'
       set: tweet276
   tweet276:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet254
+      set: tweet253
     - match: '.|\n'
       set: tweet275
   tweet275:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet253
+      set: tweet252
     - match: '.|\n'
       set: tweet274
   tweet274:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet252
+      set: tweet251
     - match: '.|\n'
       set: tweet273
   tweet273:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet251
+      set: tweet250
     - match: '.|\n'
       set: tweet272
   tweet272:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet250
+      set: tweet249
     - match: '.|\n'
       set: tweet271
   tweet271:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet249
+      set: tweet248
     - match: '.|\n'
       set: tweet270
   tweet270:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet248
+      set: tweet247
     - match: '.|\n'
       set: tweet269
   tweet269:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet247
+      set: tweet246
     - match: '.|\n'
       set: tweet268
   tweet268:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet246
+      set: tweet245
     - match: '.|\n'
       set: tweet267
   tweet267:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet245
+      set: tweet244
     - match: '.|\n'
       set: tweet266
   tweet266:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet244
+      set: tweet243
     - match: '.|\n'
       set: tweet265
   tweet265:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet243
+      set: tweet242
     - match: '.|\n'
       set: tweet264
   tweet264:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet242
+      set: tweet241
     - match: '.|\n'
       set: tweet263
   tweet263:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet241
+      set: tweet240
     - match: '.|\n'
       set: tweet262
   tweet262:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet240
+      set: tweet239
     - match: '.|\n'
       set: tweet261
   tweet261:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet239
+      set: tweet238
     - match: '.|\n'
       set: tweet260
   tweet260:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet238
+      set: tweet237
     - match: '.|\n'
       set: tweet259
   tweet259:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet237
+      set: tweet236
     - match: '.|\n'
       set: tweet258
   tweet258:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet236
+      set: tweet235
     - match: '.|\n'
       set: tweet257
   tweet257:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet235
+      set: tweet234
     - match: '.|\n'
       set: tweet256
   tweet256:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet234
+      set: tweet233
     - match: '.|\n'
       set: tweet255
   tweet255:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet233
+      set: tweet232
     - match: '.|\n'
       set: tweet254
   tweet254:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet232
+      set: tweet231
     - match: '.|\n'
       set: tweet253
   tweet253:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet231
+      set: tweet230
     - match: '.|\n'
       set: tweet252
   tweet252:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet230
+      set: tweet229
     - match: '.|\n'
       set: tweet251
   tweet251:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet229
+      set: tweet228
     - match: '.|\n'
       set: tweet250
   tweet250:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet228
+      set: tweet227
     - match: '.|\n'
       set: tweet249
   tweet249:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet227
+      set: tweet226
     - match: '.|\n'
       set: tweet248
   tweet248:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet226
+      set: tweet225
     - match: '.|\n'
       set: tweet247
   tweet247:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet225
+      set: tweet224
     - match: '.|\n'
       set: tweet246
   tweet246:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet224
+      set: tweet223
     - match: '.|\n'
       set: tweet245
   tweet245:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet223
+      set: tweet222
     - match: '.|\n'
       set: tweet244
   tweet244:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet222
+      set: tweet221
     - match: '.|\n'
       set: tweet243
   tweet243:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet221
+      set: tweet220
     - match: '.|\n'
       set: tweet242
   tweet242:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet220
+      set: tweet219
     - match: '.|\n'
       set: tweet241
   tweet241:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet219
+      set: tweet218
     - match: '.|\n'
       set: tweet240
   tweet240:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet218
+      set: tweet217
     - match: '.|\n'
       set: tweet239
   tweet239:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet217
+      set: tweet216
     - match: '.|\n'
       set: tweet238
   tweet238:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet216
+      set: tweet215
     - match: '.|\n'
       set: tweet237
   tweet237:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet215
+      set: tweet214
     - match: '.|\n'
       set: tweet236
   tweet236:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet214
+      set: tweet213
     - match: '.|\n'
       set: tweet235
   tweet235:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet213
+      set: tweet212
     - match: '.|\n'
       set: tweet234
   tweet234:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet212
+      set: tweet211
     - match: '.|\n'
       set: tweet233
   tweet233:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet211
+      set: tweet210
     - match: '.|\n'
       set: tweet232
   tweet232:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet210
+      set: tweet209
     - match: '.|\n'
       set: tweet231
   tweet231:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet209
+      set: tweet208
     - match: '.|\n'
       set: tweet230
   tweet230:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet208
+      set: tweet207
     - match: '.|\n'
       set: tweet229
   tweet229:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet207
+      set: tweet206
     - match: '.|\n'
       set: tweet228
   tweet228:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet206
+      set: tweet205
     - match: '.|\n'
       set: tweet227
   tweet227:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet205
+      set: tweet204
     - match: '.|\n'
       set: tweet226
   tweet226:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet204
+      set: tweet203
     - match: '.|\n'
       set: tweet225
   tweet225:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet203
+      set: tweet202
     - match: '.|\n'
       set: tweet224
   tweet224:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet202
+      set: tweet201
     - match: '.|\n'
       set: tweet223
   tweet223:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet201
+      set: tweet200
     - match: '.|\n'
       set: tweet222
   tweet222:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet200
+      set: tweet199
     - match: '.|\n'
       set: tweet221
   tweet221:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet199
+      set: tweet198
     - match: '.|\n'
       set: tweet220
   tweet220:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet198
+      set: tweet197
     - match: '.|\n'
       set: tweet219
   tweet219:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet197
+      set: tweet196
     - match: '.|\n'
       set: tweet218
   tweet218:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet196
+      set: tweet195
     - match: '.|\n'
       set: tweet217
   tweet217:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet195
+      set: tweet194
     - match: '.|\n'
       set: tweet216
   tweet216:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet194
+      set: tweet193
     - match: '.|\n'
       set: tweet215
   tweet215:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet193
+      set: tweet192
     - match: '.|\n'
       set: tweet214
   tweet214:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet192
+      set: tweet191
     - match: '.|\n'
       set: tweet213
   tweet213:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet191
+      set: tweet190
     - match: '.|\n'
       set: tweet212
   tweet212:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet190
+      set: tweet189
     - match: '.|\n'
       set: tweet211
   tweet211:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet189
+      set: tweet188
     - match: '.|\n'
       set: tweet210
   tweet210:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet188
+      set: tweet187
     - match: '.|\n'
       set: tweet209
   tweet209:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet187
+      set: tweet186
     - match: '.|\n'
       set: tweet208
   tweet208:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet186
+      set: tweet185
     - match: '.|\n'
       set: tweet207
   tweet207:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet185
+      set: tweet184
     - match: '.|\n'
       set: tweet206
   tweet206:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet184
+      set: tweet183
     - match: '.|\n'
       set: tweet205
   tweet205:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet183
+      set: tweet182
     - match: '.|\n'
       set: tweet204
   tweet204:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet182
+      set: tweet181
     - match: '.|\n'
       set: tweet203
   tweet203:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet181
+      set: tweet180
     - match: '.|\n'
       set: tweet202
   tweet202:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet180
+      set: tweet179
     - match: '.|\n'
       set: tweet201
   tweet201:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet179
+      set: tweet178
     - match: '.|\n'
       set: tweet200
   tweet200:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet178
+      set: tweet177
     - match: '.|\n'
       set: tweet199
   tweet199:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet177
+      set: tweet176
     - match: '.|\n'
       set: tweet198
   tweet198:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet176
+      set: tweet175
     - match: '.|\n'
       set: tweet197
   tweet197:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet175
+      set: tweet174
     - match: '.|\n'
       set: tweet196
   tweet196:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet174
+      set: tweet173
     - match: '.|\n'
       set: tweet195
   tweet195:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet173
+      set: tweet172
     - match: '.|\n'
       set: tweet194
   tweet194:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet172
+      set: tweet171
     - match: '.|\n'
       set: tweet193
   tweet193:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet171
+      set: tweet170
     - match: '.|\n'
       set: tweet192
   tweet192:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet170
+      set: tweet169
     - match: '.|\n'
       set: tweet191
   tweet191:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet169
+      set: tweet168
     - match: '.|\n'
       set: tweet190
   tweet190:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet168
+      set: tweet167
     - match: '.|\n'
       set: tweet189
   tweet189:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet167
+      set: tweet166
     - match: '.|\n'
       set: tweet188
   tweet188:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet166
+      set: tweet165
     - match: '.|\n'
       set: tweet187
   tweet187:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet165
+      set: tweet164
     - match: '.|\n'
       set: tweet186
   tweet186:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet164
+      set: tweet163
     - match: '.|\n'
       set: tweet185
   tweet185:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet163
+      set: tweet162
     - match: '.|\n'
       set: tweet184
   tweet184:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet162
+      set: tweet161
     - match: '.|\n'
       set: tweet183
   tweet183:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet161
+      set: tweet160
     - match: '.|\n'
       set: tweet182
   tweet182:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet160
+      set: tweet159
     - match: '.|\n'
       set: tweet181
   tweet181:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet159
+      set: tweet158
     - match: '.|\n'
       set: tweet180
   tweet180:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet158
+      set: tweet157
     - match: '.|\n'
       set: tweet179
   tweet179:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet157
+      set: tweet156
     - match: '.|\n'
       set: tweet178
   tweet178:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet156
+      set: tweet155
     - match: '.|\n'
       set: tweet177
   tweet177:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet155
+      set: tweet154
     - match: '.|\n'
       set: tweet176
   tweet176:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet154
+      set: tweet153
     - match: '.|\n'
       set: tweet175
   tweet175:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet153
+      set: tweet152
     - match: '.|\n'
       set: tweet174
   tweet174:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet152
+      set: tweet151
     - match: '.|\n'
       set: tweet173
   tweet173:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet151
+      set: tweet150
     - match: '.|\n'
       set: tweet172
   tweet172:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet150
+      set: tweet149
     - match: '.|\n'
       set: tweet171
   tweet171:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet149
+      set: tweet148
     - match: '.|\n'
       set: tweet170
   tweet170:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet148
+      set: tweet147
     - match: '.|\n'
       set: tweet169
   tweet169:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet147
+      set: tweet146
     - match: '.|\n'
       set: tweet168
   tweet168:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet146
+      set: tweet145
     - match: '.|\n'
       set: tweet167
   tweet167:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet145
+      set: tweet144
     - match: '.|\n'
       set: tweet166
   tweet166:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet144
+      set: tweet143
     - match: '.|\n'
       set: tweet165
   tweet165:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet143
+      set: tweet142
     - match: '.|\n'
       set: tweet164
   tweet164:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet142
+      set: tweet141
     - match: '.|\n'
       set: tweet163
   tweet163:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet141
+      set: tweet140
     - match: '.|\n'
       set: tweet162
   tweet162:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet140
+      set: tweet139
     - match: '.|\n'
       set: tweet161
   tweet161:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet139
+      set: tweet138
     - match: '.|\n'
       set: tweet160
   tweet160:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet138
+      set: tweet137
     - match: '.|\n'
       set: tweet159
   tweet159:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet137
+      set: tweet136
     - match: '.|\n'
       set: tweet158
   tweet158:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet136
+      set: tweet135
     - match: '.|\n'
       set: tweet157
   tweet157:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet135
+      set: tweet134
     - match: '.|\n'
       set: tweet156
   tweet156:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet134
+      set: tweet133
     - match: '.|\n'
       set: tweet155
   tweet155:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet133
+      set: tweet132
     - match: '.|\n'
       set: tweet154
   tweet154:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet132
+      set: tweet131
     - match: '.|\n'
       set: tweet153
   tweet153:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet131
+      set: tweet130
     - match: '.|\n'
       set: tweet152
   tweet152:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet130
+      set: tweet129
     - match: '.|\n'
       set: tweet151
   tweet151:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet129
+      set: tweet128
     - match: '.|\n'
       set: tweet150
   tweet150:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet128
+      set: tweet127
     - match: '.|\n'
       set: tweet149
   tweet149:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet127
+      set: tweet126
     - match: '.|\n'
       set: tweet148
   tweet148:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet126
+      set: tweet125
     - match: '.|\n'
       set: tweet147
   tweet147:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet125
+      set: tweet124
     - match: '.|\n'
       set: tweet146
   tweet146:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet124
+      set: tweet123
     - match: '.|\n'
       set: tweet145
   tweet145:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet123
+      set: tweet122
     - match: '.|\n'
       set: tweet144
   tweet144:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet122
+      set: tweet121
     - match: '.|\n'
       set: tweet143
   tweet143:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet121
+      set: tweet120
     - match: '.|\n'
       set: tweet142
   tweet142:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet120
+      set: tweet119
     - match: '.|\n'
       set: tweet141
   tweet141:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet119
+      set: tweet118
     - match: '.|\n'
       set: tweet140
   tweet140:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet118
+      set: tweet117
     - match: '.|\n'
       set: tweet139
   tweet139:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet117
+      set: tweet116
     - match: '.|\n'
       set: tweet138
   tweet138:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet116
+      set: tweet115
     - match: '.|\n'
       set: tweet137
   tweet137:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet115
+      set: tweet114
     - match: '.|\n'
       set: tweet136
   tweet136:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet114
+      set: tweet113
     - match: '.|\n'
       set: tweet135
   tweet135:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet113
+      set: tweet112
     - match: '.|\n'
       set: tweet134
   tweet134:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet112
+      set: tweet111
     - match: '.|\n'
       set: tweet133
   tweet133:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet111
+      set: tweet110
     - match: '.|\n'
       set: tweet132
   tweet132:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet110
+      set: tweet109
     - match: '.|\n'
       set: tweet131
   tweet131:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet109
+      set: tweet108
     - match: '.|\n'
       set: tweet130
   tweet130:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet108
+      set: tweet107
     - match: '.|\n'
       set: tweet129
   tweet129:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet107
+      set: tweet106
     - match: '.|\n'
       set: tweet128
   tweet128:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet106
+      set: tweet105
     - match: '.|\n'
       set: tweet127
   tweet127:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet105
+      set: tweet104
     - match: '.|\n'
       set: tweet126
   tweet126:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet104
+      set: tweet103
     - match: '.|\n'
       set: tweet125
   tweet125:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet103
+      set: tweet102
     - match: '.|\n'
       set: tweet124
   tweet124:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet102
+      set: tweet101
     - match: '.|\n'
       set: tweet123
   tweet123:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet101
+      set: tweet100
     - match: '.|\n'
       set: tweet122
   tweet122:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet100
+      set: tweet99
     - match: '.|\n'
       set: tweet121
   tweet121:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet99
+      set: tweet98
     - match: '.|\n'
       set: tweet120
   tweet120:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet98
+      set: tweet97
     - match: '.|\n'
       set: tweet119
   tweet119:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet97
+      set: tweet96
     - match: '.|\n'
       set: tweet118
   tweet118:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet96
+      set: tweet95
     - match: '.|\n'
       set: tweet117
   tweet117:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet95
+      set: tweet94
     - match: '.|\n'
       set: tweet116
   tweet116:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet94
+      set: tweet93
     - match: '.|\n'
       set: tweet115
   tweet115:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet93
+      set: tweet92
     - match: '.|\n'
       set: tweet114
   tweet114:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet92
+      set: tweet91
     - match: '.|\n'
       set: tweet113
   tweet113:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet91
+      set: tweet90
     - match: '.|\n'
       set: tweet112
   tweet112:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet90
+      set: tweet89
     - match: '.|\n'
       set: tweet111
   tweet111:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet89
+      set: tweet88
     - match: '.|\n'
       set: tweet110
   tweet110:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet88
+      set: tweet87
     - match: '.|\n'
       set: tweet109
   tweet109:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet87
+      set: tweet86
     - match: '.|\n'
       set: tweet108
   tweet108:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet86
+      set: tweet85
     - match: '.|\n'
       set: tweet107
   tweet107:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet85
+      set: tweet84
     - match: '.|\n'
       set: tweet106
   tweet106:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet84
+      set: tweet83
     - match: '.|\n'
       set: tweet105
   tweet105:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet83
+      set: tweet82
     - match: '.|\n'
       set: tweet104
   tweet104:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet82
+      set: tweet81
     - match: '.|\n'
       set: tweet103
   tweet103:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet81
+      set: tweet80
     - match: '.|\n'
       set: tweet102
   tweet102:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet80
+      set: tweet79
     - match: '.|\n'
       set: tweet101
   tweet101:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet79
+      set: tweet78
     - match: '.|\n'
       set: tweet100
   tweet100:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet78
+      set: tweet77
     - match: '.|\n'
       set: tweet99
   tweet99:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet77
+      set: tweet76
     - match: '.|\n'
       set: tweet98
   tweet98:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet76
+      set: tweet75
     - match: '.|\n'
       set: tweet97
   tweet97:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet75
+      set: tweet74
     - match: '.|\n'
       set: tweet96
   tweet96:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet74
+      set: tweet73
     - match: '.|\n'
       set: tweet95
   tweet95:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet73
+      set: tweet72
     - match: '.|\n'
       set: tweet94
   tweet94:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet72
+      set: tweet71
     - match: '.|\n'
       set: tweet93
   tweet93:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet71
+      set: tweet70
     - match: '.|\n'
       set: tweet92
   tweet92:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet70
+      set: tweet69
     - match: '.|\n'
       set: tweet91
   tweet91:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet69
+      set: tweet68
     - match: '.|\n'
       set: tweet90
   tweet90:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet68
+      set: tweet67
     - match: '.|\n'
       set: tweet89
   tweet89:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet67
+      set: tweet66
     - match: '.|\n'
       set: tweet88
   tweet88:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet66
+      set: tweet65
     - match: '.|\n'
       set: tweet87
   tweet87:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet65
+      set: tweet64
     - match: '.|\n'
       set: tweet86
   tweet86:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet64
+      set: tweet63
     - match: '.|\n'
       set: tweet85
   tweet85:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet63
+      set: tweet62
     - match: '.|\n'
       set: tweet84
   tweet84:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet62
+      set: tweet61
     - match: '.|\n'
       set: tweet83
   tweet83:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet61
+      set: tweet60
     - match: '.|\n'
       set: tweet82
   tweet82:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet60
+      set: tweet59
     - match: '.|\n'
       set: tweet81
   tweet81:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet59
+      set: tweet58
     - match: '.|\n'
       set: tweet80
   tweet80:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet58
+      set: tweet57
     - match: '.|\n'
       set: tweet79
   tweet79:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet57
+      set: tweet56
     - match: '.|\n'
       set: tweet78
   tweet78:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet56
+      set: tweet55
     - match: '.|\n'
       set: tweet77
   tweet77:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet55
+      set: tweet54
     - match: '.|\n'
       set: tweet76
   tweet76:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet54
+      set: tweet53
     - match: '.|\n'
       set: tweet75
   tweet75:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet53
+      set: tweet52
     - match: '.|\n'
       set: tweet74
   tweet74:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet52
+      set: tweet51
     - match: '.|\n'
       set: tweet73
   tweet73:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet51
+      set: tweet50
     - match: '.|\n'
       set: tweet72
   tweet72:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet50
+      set: tweet49
     - match: '.|\n'
       set: tweet71
   tweet71:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet49
+      set: tweet48
     - match: '.|\n'
       set: tweet70
   tweet70:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet48
+      set: tweet47
     - match: '.|\n'
       set: tweet69
   tweet69:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet47
+      set: tweet46
     - match: '.|\n'
       set: tweet68
   tweet68:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet46
+      set: tweet45
     - match: '.|\n'
       set: tweet67
   tweet67:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet45
+      set: tweet44
     - match: '.|\n'
       set: tweet66
   tweet66:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet44
+      set: tweet43
     - match: '.|\n'
       set: tweet65
   tweet65:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet43
+      set: tweet42
     - match: '.|\n'
       set: tweet64
   tweet64:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet42
+      set: tweet41
     - match: '.|\n'
       set: tweet63
   tweet63:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet41
+      set: tweet40
     - match: '.|\n'
       set: tweet62
   tweet62:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet40
+      set: tweet39
     - match: '.|\n'
       set: tweet61
   tweet61:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet39
+      set: tweet38
     - match: '.|\n'
       set: tweet60
   tweet60:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet38
+      set: tweet37
     - match: '.|\n'
       set: tweet59
   tweet59:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet37
+      set: tweet36
     - match: '.|\n'
       set: tweet58
   tweet58:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet36
+      set: tweet35
     - match: '.|\n'
       set: tweet57
   tweet57:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet35
+      set: tweet34
     - match: '.|\n'
       set: tweet56
   tweet56:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet34
+      set: tweet33
     - match: '.|\n'
       set: tweet55
   tweet55:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet33
+      set: tweet32
     - match: '.|\n'
       set: tweet54
   tweet54:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet32
+      set: tweet31
     - match: '.|\n'
       set: tweet53
   tweet53:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet31
+      set: tweet30
     - match: '.|\n'
       set: tweet52
   tweet52:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet30
+      set: tweet29
     - match: '.|\n'
       set: tweet51
   tweet51:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet29
+      set: tweet28
     - match: '.|\n'
       set: tweet50
   tweet50:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet28
+      set: tweet27
     - match: '.|\n'
       set: tweet49
   tweet49:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet27
+      set: tweet26
     - match: '.|\n'
       set: tweet48
   tweet48:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet26
+      set: tweet25
     - match: '.|\n'
       set: tweet47
   tweet47:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet25
+      set: tweet24
     - match: '.|\n'
       set: tweet46
   tweet46:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet24
+      set: tweet23
     - match: '.|\n'
       set: tweet45
   tweet45:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet23
+      set: tweet22
     - match: '.|\n'
       set: tweet44
   tweet44:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet22
+      set: tweet21
     - match: '.|\n'
       set: tweet43
   tweet43:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet21
+      set: tweet20
     - match: '.|\n'
       set: tweet42
   tweet42:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet20
+      set: tweet19
     - match: '.|\n'
       set: tweet41
   tweet41:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet19
+      set: tweet18
     - match: '.|\n'
       set: tweet40
   tweet40:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet18
+      set: tweet17
     - match: '.|\n'
       set: tweet39
   tweet39:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet17
+      set: tweet16
     - match: '.|\n'
       set: tweet38
   tweet38:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet16
+      set: tweet15
     - match: '.|\n'
       set: tweet37
   tweet37:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet15
+      set: tweet14
     - match: '.|\n'
       set: tweet36
   tweet36:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet14
+      set: tweet13
     - match: '.|\n'
       set: tweet35
   tweet35:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet13
+      set: tweet12
     - match: '.|\n'
       set: tweet34
   tweet34:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet12
+      set: tweet11
     - match: '.|\n'
       set: tweet33
   tweet33:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet11
+      set: tweet10
     - match: '.|\n'
       set: tweet32
   tweet32:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet10
+      set: tweet9
     - match: '.|\n'
       set: tweet31
   tweet31:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet9
+      set: tweet8
     - match: '.|\n'
       set: tweet30
   tweet30:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet8
+      set: tweet7
     - match: '.|\n'
       set: tweet29
   tweet29:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet7
+      set: tweet6
     - match: '.|\n'
       set: tweet28
   tweet28:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet6
+      set: tweet5
     - match: '.|\n'
       set: tweet27
   tweet27:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet5
+      set: tweet4
     - match: '.|\n'
       set: tweet26
   tweet26:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet4
+      set: tweet3
     - match: '.|\n'
       set: tweet25
   tweet25:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet3
+      set: tweet2
     - match: '.|\n'
       set: tweet24
   tweet24:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet2
+      set: tweet1
     - match: '.|\n'
       set: tweet23
   tweet23:
     - match: "{{url}}"
       scope: string.quoted
-      set: tweet1
+      set: tweet0
     - match: '.|\n'
       set: tweet22
   tweet22:
     - match: "{{url}}"
-      scope: string.quoted
+      scope: invalid.illegal
       set: tweet0
     - match: '.|\n'
       set: tweet21
   tweet21:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet20
   tweet20:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet19
   tweet19:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet18
   tweet18:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet17
   tweet17:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet16
   tweet16:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet15
   tweet15:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet14
   tweet14:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet13
   tweet13:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet12
   tweet12:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet11
   tweet11:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet10
   tweet10:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet9
   tweet9:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet8
   tweet8:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet7
   tweet7:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet6
   tweet6:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet5
   tweet5:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet4
   tweet4:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet3
   tweet3:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet2
   tweet2:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet1
   tweet1:
+    - match: "{{url}}"
+      scope: invalid.illegal
+      set: tweet0
     - match: '.|\n'
       set: tweet0
-
