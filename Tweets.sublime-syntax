@@ -7,7 +7,7 @@ file_extensions:
 scope: tweet.text
 
 variables:
-  url_start: "(^|(?<![/\"'!=A-Z0-9_@\\x{0000ff20}$#\\x{0000ff03}\\.-]))"
+  url_start: "(^|(?<![/\"'!=A-Z0-9_@\\x{ff20}$#\\x{ff03}\\.-]))"
   url_http: "(https?://)"
   url_domain_valid: "[^\\s!\\\"#$%&'()*+,./:;<=>?@\\[\\]^_`{|}~-]"
   url_domain: "({{url_subdomain}}*{{url_lastdomain}}({{url_gTLD}}|{{url_ccTLD}}|{{url_punycode}}))"
@@ -23,7 +23,7 @@ variables:
       (?=[^a-z]|$))"
   url_punycode: "(xn--[0-9a-z]+)"
   url_port: "(:[0-9]+?)"
-  latin_accents: "[\\\\xc0-\\\\xd6\\\\xd8-\\\\xf6\\\\xf8-\\\\xff\\x{00000100}-\\x{0000024f}\\x{00000253}-\\x{00000254}\\x{00000256}\\x{00000257}\\x{00000259}\\x{0000025b}\\x{00000263}\\x{00000268}\\x{0000026f}\\x{00000272}\\x{00000289}\\x{0000028b}\\x{000002bb}\\x{00001e00}-\\x{00001eff}]"
+  latin_accents: "[\\\\xc0-\\\\xd6\\\\xd8-\\\\xf6\\\\xf8-\\\\xff\\x{0100}-\\x{024f}\\x{0253}-\\x{0254}\\x{0256}\\x{0257}\\x{0259}\\x{025b}\\x{0263}\\x{0268}\\x{026f}\\x{0272}\\x{0289}\\x{028b}\\x{02bb}\\x{1e00}-\\x{1eff}]"
   valid_general_url_path_chars: "([a-z0-9!*';:=+,.$/%%#\\[\\]_~&-]|{{latin_accents}})"
   valid_url_balanced_parens: "(\\({{valid_general_url_path_chars}}+\\))"
   valid_url_path_ending_chars: "[a-z0-9=_#/+-]|{{latin_accents}}|{{valid_url_balanced_parens}}"
@@ -33,6 +33,8 @@ variables:
   url_query: "(\\?{{valid_url_query_chars}}*{{valid_url_query_ending_chars}})"
   url: "(?i){{url_start}}{{url_http}}?{{url_domain}}{{url_port}}?{{url_path}}?{{url_query}}?"
   url_debug: "(?i){{url_start}}{{url_path}}?"
+  emoji: "((?:\\x{0001f468}\\x{0001f3fb}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fc}-\\x{0001f3ff}]|\\x{0001f468}\\x{0001f3fc}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fb}\\x{0001f3fd}-\\x{0001f3ff}]|\\x{0001f468}\\x{0001f3fd}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fb}\\x{0001f3fc}\\x{0001f3fe}\\x{0001f3ff}]|\\x{0001f468}\\x{0001f3fe}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fb}-\\x{0001f3fd}\\x{0001f3ff}]|\\x{0001f468}\\x{0001f3ff}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fb}-\\x{0001f3fe}]|\\x{0001f469}\\x{0001f3fb}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fc}-\\x{0001f3ff}]|\\x{0001f469}\\x{0001f3fb}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f469}[\\x{0001f3fc}-\\x{0001f3ff}]|\\x{0001f469}\\x{0001f3fc}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fb}\\x{0001f3fd}-\\x{0001f3ff}]|\\x{0001f469}\\x{0001f3fc}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f469}[\\x{0001f3fb}\\x{0001f3fd}-\\x{0001f3ff}]|\\x{0001f469}\\x{0001f3fd}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fb}\\x{0001f3fc}\\x{0001f3fe}\\x{0001f3ff}]|\\x{0001f469}\\x{0001f3fd}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f469}[\\x{0001f3fb}\\x{0001f3fc}\\x{0001f3fe}\\x{0001f3ff}]|\\x{0001f469}\\x{0001f3fe}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fb}-\\x{0001f3fd}\\x{0001f3ff}]|\\x{0001f469}\\x{0001f3fe}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f469}[\\x{0001f3fb}-\\x{0001f3fd}\\x{0001f3ff}]|\\x{0001f469}\\x{0001f3ff}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f468}[\\x{0001f3fb}-\\x{0001f3fe}]|\\x{0001f469}\\x{0001f3ff}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f469}[\\x{0001f3fb}-\\x{0001f3fe}]|\\x{0001f9d1}\\x{0001f3fb}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f9d1}[\\x{0001f3fb}-\\x{0001f3ff}]|\\x{0001f9d1}\\x{0001f3fc}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f9d1}[\\x{0001f3fb}-\\x{0001f3ff}]|\\x{0001f9d1}\\x{0001f3fd}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f9d1}[\\x{0001f3fb}-\\x{0001f3ff}]|\\x{0001f9d1}\\x{0001f3fe}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f9d1}[\\x{0001f3fb}-\\x{0001f3ff}]|\\x{0001f9d1}\\x{0001f3ff}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f9d1}[\\x{0001f3fb}-\\x{0001f3ff}]|\\x{0001f9d1}\\x{200d}\\x{0001f91d}\\x{200d}\\x{0001f9d1}|\\x{0001f46b}[\\x{0001f3fb}-\\x{0001f3ff}]|\\x{0001f46c}[\\x{0001f3fb}-\\x{0001f3ff}]|\\x{0001f46d}[\\x{0001f3fb}-\\x{0001f3ff}]|[\\x{0001f46b}-\\x{0001f46d}])|[\\x{0001f468}\\x{0001f469}\\x{0001f9d1}][\\x{0001f3fb}-\\x{0001f3ff}]?\\x{200d}(?:\\x{2695}\\x{fe0f}|\\x{2696}\\x{fe0f}|\\x{2708}\\x{fe0f}|[\\x{0001f33e}\\x{0001f373}\\x{0001f393}\\x{0001f3a4}\\x{0001f3a8}\\x{0001f3eb}\\x{0001f3ed}\\x{0001f4bb}\\x{0001f4bc}\\x{0001f527}\\x{0001f52c}\\x{0001f680}\\x{0001f692}\\x{0001f9af}-\\x{0001f9b3}\\x{0001f9bc}\\x{0001f9bd}])|[\\x{26f9}\\x{0001f3cb}\\x{0001f3cc}\\x{0001f574}\\x{0001f575}]([\\x{fe0f}\\x{0001f3fb}-\\x{0001f3ff}]\\x{200d}[\\x{2640}\\x{2642}]\\x{fe0f})|[\\x{0001f3c3}\\x{0001f3c4}\\x{0001f3ca}\\x{0001f46e}\\x{0001f471}\\x{0001f473}\\x{0001f477}\\x{0001f481}\\x{0001f482}\\x{0001f486}\\x{0001f487}\\x{0001f645}-\\x{0001f647}\\x{0001f64b}\\x{0001f64d}\\x{0001f64e}\\x{0001f6a3}\\x{0001f6b4}-\\x{0001f6b6}\\x{0001f926}\\x{0001f935}\\x{0001f937}-\\x{0001f939}\\x{0001f93d}\\x{0001f93e}\\x{0001f9b8}\\x{0001f9b9}\\x{0001f9cd}-\\x{0001f9cf}\\x{0001f9d6}-\\x{0001f9dd}][\\x{0001f3fb}-\\x{0001f3ff}]?\\x{200d}[\\x{2640}\\x{2642}]\\x{fe0f}|(?:\\x{0001f468}\\x{200d}\\x{2764}\\x{fe0f}\\x{200d}\\x{0001f48b}\\x{200d}\\x{0001f468}|\\x{0001f469}\\x{200d}\\x{2764}\\x{fe0f}\\x{200d}\\x{0001f48b}\\x{200d}[\\x{0001f468}\\x{0001f469}]|\\x{0001f468}\\x{200d}\\x{0001f468}\\x{200d}\\x{0001f466}\\x{200d}\\x{0001f466}|\\x{0001f468}\\x{200d}\\x{0001f468}\\x{200d}\\x{0001f467}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f468}\\x{200d}\\x{0001f469}\\x{200d}\\x{0001f466}\\x{200d}\\x{0001f466}|\\x{0001f468}\\x{200d}\\x{0001f469}\\x{200d}\\x{0001f467}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f469}\\x{200d}\\x{0001f469}\\x{200d}\\x{0001f466}\\x{200d}\\x{0001f466}|\\x{0001f469}\\x{200d}\\x{0001f469}\\x{200d}\\x{0001f467}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f468}\\x{200d}\\x{2764}\\x{fe0f}\\x{200d}\\x{0001f468}|\\x{0001f469}\\x{200d}\\x{2764}\\x{fe0f}\\x{200d}[\\x{0001f468}\\x{0001f469}]|\\x{0001f3f3}\\x{fe0f}\\x{200d}\\x{26a7}\\x{fe0f}|\\x{0001f468}\\x{200d}\\x{0001f466}\\x{200d}\\x{0001f466}|\\x{0001f468}\\x{200d}\\x{0001f467}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f468}\\x{200d}\\x{0001f468}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f468}\\x{200d}\\x{0001f469}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f469}\\x{200d}\\x{0001f466}\\x{200d}\\x{0001f466}|\\x{0001f469}\\x{200d}\\x{0001f467}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f469}\\x{200d}\\x{0001f469}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f3f3}\\x{fe0f}\\x{200d}\\x{0001f308}|\\x{0001f3f4}\\x{200d}\\x{2620}\\x{fe0f}|\\x{0001f46f}\\x{200d}\\x{2640}\\x{fe0f}|\\x{0001f46f}\\x{200d}\\x{2642}\\x{fe0f}|\\x{0001f93c}\\x{200d}\\x{2640}\\x{fe0f}|\\x{0001f93c}\\x{200d}\\x{2642}\\x{fe0f}|\\x{0001f9de}\\x{200d}\\x{2640}\\x{fe0f}|\\x{0001f9de}\\x{200d}\\x{2642}\\x{fe0f}|\\x{0001f9df}\\x{200d}\\x{2640}\\x{fe0f}|\\x{0001f9df}\\x{200d}\\x{2642}\\x{fe0f}|\\x{0001f415}\\x{200d}\\x{0001f9ba}|\\x{0001f441}\\x{200d}\\x{0001f5e8}|\\x{0001f468}\\x{200d}[\\x{0001f466}\\x{0001f467}]|\\x{0001f469}\\x{200d}[\\x{0001f466}\\x{0001f467}])|[#*0-9]\\x{fe0f}?\\x{20e3}|(?:[©®\\x{2122}\\x{265f}]\\x{fe0f})|[\\x{203c}\\x{2049}\\x{2139}\\x{2194}-\\x{2199}\\x{21a9}\\x{21aa}\\x{231a}\\x{231b}\\x{2328}\\x{23cf}\\x{23ed}-\\x{23ef}\\x{23f1}\\x{23f2}\\x{23f8}-\\x{23fa}\\x{24c2}\\x{25aa}\\x{25ab}\\x{25b6}\\x{25c0}\\x{25fb}-\\x{25fe}\\x{2600}-\\x{2604}\\x{260e}\\x{2611}\\x{2614}\\x{2615}\\x{2618}\\x{2620}\\x{2622}\\x{2623}\\x{2626}\\x{262a}\\x{262e}\\x{262f}\\x{2638}-\\x{263a}\\x{2640}\\x{2642}\\x{2648}-\\x{2653}\\x{2660}\\x{2663}\\x{2665}\\x{2666}\\x{2668}\\x{267b}\\x{267f}\\x{2692}-\\x{2697}\\x{2699}\\x{269b}\\x{269c}\\x{26a0}\\x{26a1}\\x{26a7}\\x{26aa}\\x{26ab}\\x{26b0}\\x{26b1}\\x{26bd}\\x{26be}\\x{26c4}\\x{26c5}\\x{26c8}\\x{26cf}\\x{26d1}\\x{26d3}\\x{26d4}\\x{26e9}\\x{26ea}\\x{26f0}-\\x{26f5}\\x{26f8}\\x{26fa}\\x{26fd}\\x{2702}\\x{2708}\\x{2709}\\x{270f}\\x{2712}\\x{2714}\\x{2716}\\x{271d}\\x{2721}\\x{2733}\\x{2734}\\x{2744}\\x{2747}\\x{2757}\\x{2763}\\x{2764}\\x{27a1}\\x{2934}\\x{2935}\\x{2b05}-\\x{2b07}\\x{2b1b}\\x{2b1c}\\x{2b50}\\x{2b55}\\x{3030}\\x{303d}\\x{3297}\\x{3299}\\x{0001f004}\\x{0001f170}\\x{0001f171}\\x{0001f17e}\\x{0001f17f}\\x{0001f202}\\x{0001f21a}\\x{0001f22f}\\x{0001f237}\\x{0001f321}\\x{0001f324}-\\x{0001f32c}\\x{0001f336}\\x{0001f37d}\\x{0001f396}\\x{0001f397}\\x{0001f399}-\\x{0001f39b}\\x{0001f39e}\\x{0001f39f}\\x{0001f3cd}\\x{0001f3ce}\\x{0001f3d4}-\\x{0001f3df}\\x{0001f3f3}\\x{0001f3f5}\\x{0001f3f7}\\x{0001f43f}\\x{0001f441}\\x{0001f4fd}\\x{0001f549}\\x{0001f54a}\\x{0001f56f}\\x{0001f570}\\x{0001f573}\\x{0001f576}-\\x{0001f579}\\x{0001f587}\\x{0001f58a}-\\x{0001f58d}\\x{0001f5a5}\\x{0001f5a8}\\x{0001f5b1}\\x{0001f5b2}\\x{0001f5bc}\\x{0001f5c2}-\\x{0001f5c4}\\x{0001f5d1}-\\x{0001f5d3}\\x{0001f5dc}-\\x{0001f5de}\\x{0001f5e1}\\x{0001f5e3}\\x{0001f5e8}\\x{0001f5ef}\\x{0001f5f3}\\x{0001f5fa}\\x{0001f6cb}\\x{0001f6cd}-\\x{0001f6cf}\\x{0001f6e0}-\\x{0001f6e5}\\x{0001f6e9}\\x{0001f6f0}\\x{0001f6f3}](?:\\x{fe0f}|(?!\\x{fe0e}))|(?:[\\x{261d}\\x{26f7}\\x{26f9}\\x{270c}\\x{270d}\\x{0001f3cb}\\x{0001f3cc}\\x{0001f574}\\x{0001f575}\\x{0001f590}](?:\\x{fe0f}|(?!\\x{fe0e}))|[\\x{270a}\\x{270b}\\x{0001f385}\\x{0001f3c2}-\\x{0001f3c4}\\x{0001f3c7}\\x{0001f3ca}\\x{0001f442}\\x{0001f443}\\x{0001f446}-\\x{0001f450}\\x{0001f466}-\\x{0001f469}\\x{0001f46e}\\x{0001f470}-\\x{0001f478}\\x{0001f47c}\\x{0001f481}-\\x{0001f483}\\x{0001f485}-\\x{0001f487}\\x{0001f4aa}\\x{0001f57a}\\x{0001f595}\\x{0001f596}\\x{0001f645}-\\x{0001f647}\\x{0001f64b}-\\x{0001f64f}\\x{0001f6a3}\\x{0001f6b4}-\\x{0001f6b6}\\x{0001f6c0}\\x{0001f6cc}\\x{0001f90f}\\x{0001f918}-\\x{0001f91c}\\x{0001f91e}\\x{0001f91f}\\x{0001f926}\\x{0001f930}-\\x{0001f939}\\x{0001f93d}\\x{0001f93e}\\x{0001f9b5}\\x{0001f9b6}\\x{0001f9b8}\\x{0001f9b9}\\x{0001f9bb}\\x{0001f9cd}-\\x{0001f9cf}\\x{0001f9d1}-\\x{0001f9dd}])[\\x{0001f3fb}-\\x{0001f3ff}]?|(?:\\x{0001f3f4}\\x{000e0067}\\x{000e0062}\\x{000e0065}\\x{000e006e}\\x{000e0067}\\x{000e007f}|\\x{0001f3f4}\\x{000e0067}\\x{000e0062}\\x{000e0073}\\x{000e0063}\\x{000e0074}\\x{000e007f}|\\x{0001f3f4}\\x{000e0067}\\x{000e0062}\\x{000e0077}\\x{000e006c}\\x{000e0073}\\x{000e007f}|\\x{0001f1e6}[\\x{0001f1e8}-\\x{0001f1ec}\\x{0001f1ee}\\x{0001f1f1}\\x{0001f1f2}\\x{0001f1f4}\\x{0001f1f6}-\\x{0001f1fa}\\x{0001f1fc}\\x{0001f1fd}\\x{0001f1ff}]|\\x{0001f1e7}[\\x{0001f1e6}\\x{0001f1e7}\\x{0001f1e9}-\\x{0001f1ef}\\x{0001f1f1}-\\x{0001f1f4}\\x{0001f1f6}-\\x{0001f1f9}\\x{0001f1fb}\\x{0001f1fc}\\x{0001f1fe}\\x{0001f1ff}]|\\x{0001f1e8}[\\x{0001f1e6}\\x{0001f1e8}\\x{0001f1e9}\\x{0001f1eb}-\\x{0001f1ee}\\x{0001f1f0}-\\x{0001f1f5}\\x{0001f1f7}\\x{0001f1fa}-\\x{0001f1ff}]|\\x{0001f1e9}[\\x{0001f1ea}\\x{0001f1ec}\\x{0001f1ef}\\x{0001f1f0}\\x{0001f1f2}\\x{0001f1f4}\\x{0001f1ff}]|\\x{0001f1ea}[\\x{0001f1e6}\\x{0001f1e8}\\x{0001f1ea}\\x{0001f1ec}\\x{0001f1ed}\\x{0001f1f7}-\\x{0001f1fa}]|\\x{0001f1eb}[\\x{0001f1ee}-\\x{0001f1f0}\\x{0001f1f2}\\x{0001f1f4}\\x{0001f1f7}]|\\x{0001f1ec}[\\x{0001f1e6}\\x{0001f1e7}\\x{0001f1e9}-\\x{0001f1ee}\\x{0001f1f1}-\\x{0001f1f3}\\x{0001f1f5}-\\x{0001f1fa}\\x{0001f1fc}\\x{0001f1fe}]|\\x{0001f1ed}[\\x{0001f1f0}\\x{0001f1f2}\\x{0001f1f3}\\x{0001f1f7}\\x{0001f1f9}\\x{0001f1fa}]|\\x{0001f1ee}[\\x{0001f1e8}-\\x{0001f1ea}\\x{0001f1f1}-\\x{0001f1f4}\\x{0001f1f6}-\\x{0001f1f9}]|\\x{0001f1ef}[\\x{0001f1ea}\\x{0001f1f2}\\x{0001f1f4}\\x{0001f1f5}]|\\x{0001f1f0}[\\x{0001f1ea}\\x{0001f1ec}-\\x{0001f1ee}\\x{0001f1f2}\\x{0001f1f3}\\x{0001f1f5}\\x{0001f1f7}\\x{0001f1fc}\\x{0001f1fe}\\x{0001f1ff}]|\\x{0001f1f1}[\\x{0001f1e6}-\\x{0001f1e8}\\x{0001f1ee}\\x{0001f1f0}\\x{0001f1f7}-\\x{0001f1fb}\\x{0001f1fe}]|\\x{0001f1f2}[\\x{0001f1e6}\\x{0001f1e8}-\\x{0001f1ed}\\x{0001f1f0}-\\x{0001f1ff}]|\\x{0001f1f3}[\\x{0001f1e6}\\x{0001f1e8}\\x{0001f1ea}-\\x{0001f1ec}\\x{0001f1ee}\\x{0001f1f1}\\x{0001f1f4}\\x{0001f1f5}\\x{0001f1f7}\\x{0001f1fa}\\x{0001f1ff}]|\\x{0001f1f4}\\x{0001f1f2}|\\x{0001f1f5}[\\x{0001f1e6}\\x{0001f1ea}-\\x{0001f1ed}\\x{0001f1f0}-\\x{0001f1f3}\\x{0001f1f7}-\\x{0001f1f9}\\x{0001f1fc}\\x{0001f1fe}]|\\x{0001f1f6}\\x{0001f1e6}|\\x{0001f1f7}[\\x{0001f1ea}\\x{0001f1f4}\\x{0001f1f8}\\x{0001f1fa}\\x{0001f1fc}]|\\x{0001f1f8}[\\x{0001f1e6}-\\x{0001f1ea}\\x{0001f1ec}-\\x{0001f1f4}\\x{0001f1f7}-\\x{0001f1f9}\\x{0001f1fb}\\x{0001f1fd}-\\x{0001f1ff}]|\\x{0001f1f9}[\\x{0001f1e6}\\x{0001f1e8}\\x{0001f1e9}\\x{0001f1eb}-\\x{0001f1ed}\\x{0001f1ef}-\\x{0001f1f4}\\x{0001f1f7}\\x{0001f1f9}\\x{0001f1fb}\\x{0001f1fc}\\x{0001f1ff}]|\\x{0001f1fa}[\\x{0001f1e6}\\x{0001f1ec}\\x{0001f1f2}\\x{0001f1f3}\\x{0001f1f8}\\x{0001f1fe}\\x{0001f1ff}]|\\x{0001f1fb}[\\x{0001f1e6}\\x{0001f1e8}\\x{0001f1ea}\\x{0001f1ec}\\x{0001f1ee}\\x{0001f1f3}\\x{0001f1fa}]|\\x{0001f1fc}[\\x{0001f1eb}\\x{0001f1f8}]|\\x{0001f1fd}\\x{0001f1f0}|\\x{0001f1fe}[\\x{0001f1ea}\\x{0001f1f9}]|\\x{0001f1ff}[\\x{0001f1e6}\\x{0001f1f2}\\x{0001f1fc}]|[\\x{23e9}-\\x{23ec}\\x{23f0}\\x{23f3}\\x{267e}\\x{26ce}\\x{2705}\\x{2728}\\x{274c}\\x{274e}\\x{2753}-\\x{2755}\\x{2795}-\\x{2797}\\x{27b0}\\x{27bf}\\x{e50a}\\x{0001f0cf}\\x{0001f18e}\\x{0001f191}-\\x{0001f19a}\\x{0001f1e6}-\\x{0001f1ff}\\x{0001f201}\\x{0001f232}-\\x{0001f236}\\x{0001f238}-\\x{0001f23a}\\x{0001f250}\\x{0001f251}\\x{0001f300}-\\x{0001f320}\\x{0001f32d}-\\x{0001f335}\\x{0001f337}-\\x{0001f37c}\\x{0001f37e}-\\x{0001f384}\\x{0001f386}-\\x{0001f393}\\x{0001f3a0}-\\x{0001f3c1}\\x{0001f3c5}\\x{0001f3c6}\\x{0001f3c8}\\x{0001f3c9}\\x{0001f3cf}-\\x{0001f3d3}\\x{0001f3e0}-\\x{0001f3f0}\\x{0001f3f4}\\x{0001f3f8}-\\x{0001f43e}\\x{0001f440}\\x{0001f444}\\x{0001f445}\\x{0001f451}-\\x{0001f465}\\x{0001f46a}\\x{0001f46f}\\x{0001f479}-\\x{0001f47b}\\x{0001f47d}-\\x{0001f480}\\x{0001f484}\\x{0001f488}-\\x{0001f4a9}\\x{0001f4ab}-\\x{0001f4fc}\\x{0001f4ff}-\\x{0001f53d}\\x{0001f54b}-\\x{0001f54e}\\x{0001f550}-\\x{0001f567}\\x{0001f5a4}\\x{0001f5fb}-\\x{0001f644}\\x{0001f648}-\\x{0001f64a}\\x{0001f680}-\\x{0001f6a2}\\x{0001f6a4}-\\x{0001f6b3}\\x{0001f6b7}-\\x{0001f6bf}\\x{0001f6c1}-\\x{0001f6c5}\\x{0001f6d0}-\\x{0001f6d2}\\x{0001f6d5}\\x{0001f6eb}\\x{0001f6ec}\\x{0001f6f4}-\\x{0001f6fa}\\x{0001f7e0}-\\x{0001f7eb}\\x{0001f90d}\\x{0001f90e}\\x{0001f910}-\\x{0001f917}\\x{0001f91d}\\x{0001f920}-\\x{0001f925}\\x{0001f927}-\\x{0001f92f}\\x{0001f93a}\\x{0001f93c}\\x{0001f93f}-\\x{0001f945}\\x{0001f947}-\\x{0001f971}\\x{0001f973}-\\x{0001f976}\\x{0001f97a}-\\x{0001f9a2}\\x{0001f9a5}-\\x{0001f9aa}\\x{0001f9ae}-\\x{0001f9b4}\\x{0001f9b7}\\x{0001f9ba}\\x{0001f9bc}-\\x{0001f9ca}\\x{0001f9d0}\\x{0001f9de}-\\x{0001f9ff}\\x{0001fa70}-\\x{0001fa73}\\x{0001fa78}-\\x{0001fa7a}\\x{0001fa80}-\\x{0001fa82}\\x{0001fa90}-\\x{0001fa95}])|\\x{fe0f})"
+  singlechar: "[\\x{0000}-\\x{10FF}\\x{2000}-\\x{200d}\\x{2010}-\\x{201f}\\x{2032}-\\x{2037}]"
 
 contexts:
   prototype:
@@ -54,1679 +56,2240 @@ contexts:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet257
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet279
+    - match: "{{emoji}}|."
+      set: tweet278
   tweet279:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet256
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet278
+    - match: "{{emoji}}|."
+      set: tweet277
   tweet278:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet255
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet277
+    - match: "{{emoji}}|."
+      set: tweet276
   tweet277:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet254
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet276
+    - match: "{{emoji}}|."
+      set: tweet275
   tweet276:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet253
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet275
+    - match: "{{emoji}}|."
+      set: tweet274
   tweet275:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet252
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet274
+    - match: "{{emoji}}|."
+      set: tweet273
   tweet274:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet251
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet273
+    - match: "{{emoji}}|."
+      set: tweet272
   tweet273:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet250
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet272
+    - match: "{{emoji}}|."
+      set: tweet271
   tweet272:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet249
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet271
+    - match: "{{emoji}}|."
+      set: tweet270
   tweet271:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet248
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet270
+    - match: "{{emoji}}|."
+      set: tweet269
   tweet270:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet247
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet269
+    - match: "{{emoji}}|."
+      set: tweet268
   tweet269:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet246
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet268
+    - match: "{{emoji}}|."
+      set: tweet267
   tweet268:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet245
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet267
+    - match: "{{emoji}}|."
+      set: tweet266
   tweet267:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet244
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet266
+    - match: "{{emoji}}|."
+      set: tweet265
   tweet266:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet243
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet265
+    - match: "{{emoji}}|."
+      set: tweet264
   tweet265:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet242
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet264
+    - match: "{{emoji}}|."
+      set: tweet263
   tweet264:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet241
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet263
+    - match: "{{emoji}}|."
+      set: tweet262
   tweet263:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet240
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet262
+    - match: "{{emoji}}|."
+      set: tweet261
   tweet262:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet239
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet261
+    - match: "{{emoji}}|."
+      set: tweet260
   tweet261:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet238
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet260
+    - match: "{{emoji}}|."
+      set: tweet259
   tweet260:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet237
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet259
+    - match: "{{emoji}}|."
+      set: tweet258
   tweet259:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet236
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet258
+    - match: "{{emoji}}|."
+      set: tweet257
   tweet258:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet235
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet257
+    - match: "{{emoji}}|."
+      set: tweet256
   tweet257:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet234
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet256
+    - match: "{{emoji}}|."
+      set: tweet255
   tweet256:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet233
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet255
+    - match: "{{emoji}}|."
+      set: tweet254
   tweet255:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet232
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet254
+    - match: "{{emoji}}|."
+      set: tweet253
   tweet254:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet231
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet253
+    - match: "{{emoji}}|."
+      set: tweet252
   tweet253:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet230
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet252
+    - match: "{{emoji}}|."
+      set: tweet251
   tweet252:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet229
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet251
+    - match: "{{emoji}}|."
+      set: tweet250
   tweet251:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet228
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet250
+    - match: "{{emoji}}|."
+      set: tweet249
   tweet250:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet227
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet249
+    - match: "{{emoji}}|."
+      set: tweet248
   tweet249:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet226
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet248
+    - match: "{{emoji}}|."
+      set: tweet247
   tweet248:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet225
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet247
+    - match: "{{emoji}}|."
+      set: tweet246
   tweet247:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet224
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet246
+    - match: "{{emoji}}|."
+      set: tweet245
   tweet246:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet223
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet245
+    - match: "{{emoji}}|."
+      set: tweet244
   tweet245:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet222
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet244
+    - match: "{{emoji}}|."
+      set: tweet243
   tweet244:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet221
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet243
+    - match: "{{emoji}}|."
+      set: tweet242
   tweet243:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet220
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet242
+    - match: "{{emoji}}|."
+      set: tweet241
   tweet242:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet219
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet241
+    - match: "{{emoji}}|."
+      set: tweet240
   tweet241:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet218
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet240
+    - match: "{{emoji}}|."
+      set: tweet239
   tweet240:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet217
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet239
+    - match: "{{emoji}}|."
+      set: tweet238
   tweet239:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet216
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet238
+    - match: "{{emoji}}|."
+      set: tweet237
   tweet238:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet215
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet237
+    - match: "{{emoji}}|."
+      set: tweet236
   tweet237:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet214
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet236
+    - match: "{{emoji}}|."
+      set: tweet235
   tweet236:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet213
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet235
+    - match: "{{emoji}}|."
+      set: tweet234
   tweet235:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet212
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet234
+    - match: "{{emoji}}|."
+      set: tweet233
   tweet234:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet211
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet233
+    - match: "{{emoji}}|."
+      set: tweet232
   tweet233:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet210
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet232
+    - match: "{{emoji}}|."
+      set: tweet231
   tweet232:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet209
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet231
+    - match: "{{emoji}}|."
+      set: tweet230
   tweet231:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet208
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet230
+    - match: "{{emoji}}|."
+      set: tweet229
   tweet230:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet207
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet229
+    - match: "{{emoji}}|."
+      set: tweet228
   tweet229:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet206
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet228
+    - match: "{{emoji}}|."
+      set: tweet227
   tweet228:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet205
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet227
+    - match: "{{emoji}}|."
+      set: tweet226
   tweet227:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet204
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet226
+    - match: "{{emoji}}|."
+      set: tweet225
   tweet226:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet203
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet225
+    - match: "{{emoji}}|."
+      set: tweet224
   tweet225:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet202
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet224
+    - match: "{{emoji}}|."
+      set: tweet223
   tweet224:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet201
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet223
+    - match: "{{emoji}}|."
+      set: tweet222
   tweet223:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet200
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet222
+    - match: "{{emoji}}|."
+      set: tweet221
   tweet222:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet199
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet221
+    - match: "{{emoji}}|."
+      set: tweet220
   tweet221:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet198
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet220
+    - match: "{{emoji}}|."
+      set: tweet219
   tweet220:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet197
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet219
+    - match: "{{emoji}}|."
+      set: tweet218
   tweet219:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet196
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet218
+    - match: "{{emoji}}|."
+      set: tweet217
   tweet218:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet195
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet217
+    - match: "{{emoji}}|."
+      set: tweet216
   tweet217:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet194
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet216
+    - match: "{{emoji}}|."
+      set: tweet215
   tweet216:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet193
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet215
+    - match: "{{emoji}}|."
+      set: tweet214
   tweet215:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet192
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet214
+    - match: "{{emoji}}|."
+      set: tweet213
   tweet214:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet191
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet213
+    - match: "{{emoji}}|."
+      set: tweet212
   tweet213:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet190
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet212
+    - match: "{{emoji}}|."
+      set: tweet211
   tweet212:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet189
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet211
+    - match: "{{emoji}}|."
+      set: tweet210
   tweet211:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet188
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet210
+    - match: "{{emoji}}|."
+      set: tweet209
   tweet210:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet187
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet209
+    - match: "{{emoji}}|."
+      set: tweet208
   tweet209:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet186
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet208
+    - match: "{{emoji}}|."
+      set: tweet207
   tweet208:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet185
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet207
+    - match: "{{emoji}}|."
+      set: tweet206
   tweet207:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet184
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet206
+    - match: "{{emoji}}|."
+      set: tweet205
   tweet206:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet183
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet205
+    - match: "{{emoji}}|."
+      set: tweet204
   tweet205:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet182
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet204
+    - match: "{{emoji}}|."
+      set: tweet203
   tweet204:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet181
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet203
+    - match: "{{emoji}}|."
+      set: tweet202
   tweet203:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet180
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet202
+    - match: "{{emoji}}|."
+      set: tweet201
   tweet202:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet179
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet201
+    - match: "{{emoji}}|."
+      set: tweet200
   tweet201:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet178
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet200
+    - match: "{{emoji}}|."
+      set: tweet199
   tweet200:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet177
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet199
+    - match: "{{emoji}}|."
+      set: tweet198
   tweet199:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet176
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet198
+    - match: "{{emoji}}|."
+      set: tweet197
   tweet198:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet175
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet197
+    - match: "{{emoji}}|."
+      set: tweet196
   tweet197:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet174
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet196
+    - match: "{{emoji}}|."
+      set: tweet195
   tweet196:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet173
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet195
+    - match: "{{emoji}}|."
+      set: tweet194
   tweet195:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet172
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet194
+    - match: "{{emoji}}|."
+      set: tweet193
   tweet194:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet171
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet193
+    - match: "{{emoji}}|."
+      set: tweet192
   tweet193:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet170
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet192
+    - match: "{{emoji}}|."
+      set: tweet191
   tweet192:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet169
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet191
+    - match: "{{emoji}}|."
+      set: tweet190
   tweet191:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet168
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet190
+    - match: "{{emoji}}|."
+      set: tweet189
   tweet190:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet167
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet189
+    - match: "{{emoji}}|."
+      set: tweet188
   tweet189:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet166
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet188
+    - match: "{{emoji}}|."
+      set: tweet187
   tweet188:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet165
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet187
+    - match: "{{emoji}}|."
+      set: tweet186
   tweet187:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet164
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet186
+    - match: "{{emoji}}|."
+      set: tweet185
   tweet186:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet163
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet185
+    - match: "{{emoji}}|."
+      set: tweet184
   tweet185:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet162
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet184
+    - match: "{{emoji}}|."
+      set: tweet183
   tweet184:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet161
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet183
+    - match: "{{emoji}}|."
+      set: tweet182
   tweet183:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet160
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet182
+    - match: "{{emoji}}|."
+      set: tweet181
   tweet182:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet159
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet181
+    - match: "{{emoji}}|."
+      set: tweet180
   tweet181:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet158
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet180
+    - match: "{{emoji}}|."
+      set: tweet179
   tweet180:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet157
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet179
+    - match: "{{emoji}}|."
+      set: tweet178
   tweet179:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet156
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet178
+    - match: "{{emoji}}|."
+      set: tweet177
   tweet178:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet155
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet177
+    - match: "{{emoji}}|."
+      set: tweet176
   tweet177:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet154
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet176
+    - match: "{{emoji}}|."
+      set: tweet175
   tweet176:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet153
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet175
+    - match: "{{emoji}}|."
+      set: tweet174
   tweet175:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet152
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet174
+    - match: "{{emoji}}|."
+      set: tweet173
   tweet174:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet151
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet173
+    - match: "{{emoji}}|."
+      set: tweet172
   tweet173:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet150
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet172
+    - match: "{{emoji}}|."
+      set: tweet171
   tweet172:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet149
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet171
+    - match: "{{emoji}}|."
+      set: tweet170
   tweet171:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet148
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet170
+    - match: "{{emoji}}|."
+      set: tweet169
   tweet170:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet147
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet169
+    - match: "{{emoji}}|."
+      set: tweet168
   tweet169:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet146
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet168
+    - match: "{{emoji}}|."
+      set: tweet167
   tweet168:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet145
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet167
+    - match: "{{emoji}}|."
+      set: tweet166
   tweet167:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet144
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet166
+    - match: "{{emoji}}|."
+      set: tweet165
   tweet166:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet143
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet165
+    - match: "{{emoji}}|."
+      set: tweet164
   tweet165:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet142
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet164
+    - match: "{{emoji}}|."
+      set: tweet163
   tweet164:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet141
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet163
+    - match: "{{emoji}}|."
+      set: tweet162
   tweet163:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet140
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet162
+    - match: "{{emoji}}|."
+      set: tweet161
   tweet162:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet139
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet161
+    - match: "{{emoji}}|."
+      set: tweet160
   tweet161:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet138
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet160
+    - match: "{{emoji}}|."
+      set: tweet159
   tweet160:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet137
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet159
+    - match: "{{emoji}}|."
+      set: tweet158
   tweet159:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet136
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet158
+    - match: "{{emoji}}|."
+      set: tweet157
   tweet158:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet135
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet157
+    - match: "{{emoji}}|."
+      set: tweet156
   tweet157:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet134
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet156
+    - match: "{{emoji}}|."
+      set: tweet155
   tweet156:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet133
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet155
+    - match: "{{emoji}}|."
+      set: tweet154
   tweet155:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet132
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet154
+    - match: "{{emoji}}|."
+      set: tweet153
   tweet154:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet131
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet153
+    - match: "{{emoji}}|."
+      set: tweet152
   tweet153:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet130
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet152
+    - match: "{{emoji}}|."
+      set: tweet151
   tweet152:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet129
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet151
+    - match: "{{emoji}}|."
+      set: tweet150
   tweet151:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet128
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet150
+    - match: "{{emoji}}|."
+      set: tweet149
   tweet150:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet127
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet149
+    - match: "{{emoji}}|."
+      set: tweet148
   tweet149:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet126
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet148
+    - match: "{{emoji}}|."
+      set: tweet147
   tweet148:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet125
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet147
+    - match: "{{emoji}}|."
+      set: tweet146
   tweet147:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet124
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet146
+    - match: "{{emoji}}|."
+      set: tweet145
   tweet146:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet123
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet145
+    - match: "{{emoji}}|."
+      set: tweet144
   tweet145:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet122
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet144
+    - match: "{{emoji}}|."
+      set: tweet143
   tweet144:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet121
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet143
+    - match: "{{emoji}}|."
+      set: tweet142
   tweet143:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet120
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet142
+    - match: "{{emoji}}|."
+      set: tweet141
   tweet142:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet119
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet141
+    - match: "{{emoji}}|."
+      set: tweet140
   tweet141:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet118
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet140
+    - match: "{{emoji}}|."
+      set: tweet139
   tweet140:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet117
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet139
+    - match: "{{emoji}}|."
+      set: tweet138
   tweet139:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet116
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet138
+    - match: "{{emoji}}|."
+      set: tweet137
   tweet138:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet115
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet137
+    - match: "{{emoji}}|."
+      set: tweet136
   tweet137:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet114
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet136
+    - match: "{{emoji}}|."
+      set: tweet135
   tweet136:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet113
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet135
+    - match: "{{emoji}}|."
+      set: tweet134
   tweet135:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet112
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet134
+    - match: "{{emoji}}|."
+      set: tweet133
   tweet134:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet111
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet133
+    - match: "{{emoji}}|."
+      set: tweet132
   tweet133:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet110
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet132
+    - match: "{{emoji}}|."
+      set: tweet131
   tweet132:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet109
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet131
+    - match: "{{emoji}}|."
+      set: tweet130
   tweet131:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet108
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet130
+    - match: "{{emoji}}|."
+      set: tweet129
   tweet130:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet107
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet129
+    - match: "{{emoji}}|."
+      set: tweet128
   tweet129:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet106
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet128
+    - match: "{{emoji}}|."
+      set: tweet127
   tweet128:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet105
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet127
+    - match: "{{emoji}}|."
+      set: tweet126
   tweet127:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet104
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet126
+    - match: "{{emoji}}|."
+      set: tweet125
   tweet126:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet103
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet125
+    - match: "{{emoji}}|."
+      set: tweet124
   tweet125:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet102
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet124
+    - match: "{{emoji}}|."
+      set: tweet123
   tweet124:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet101
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet123
+    - match: "{{emoji}}|."
+      set: tweet122
   tweet123:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet100
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet122
+    - match: "{{emoji}}|."
+      set: tweet121
   tweet122:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet99
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet121
+    - match: "{{emoji}}|."
+      set: tweet120
   tweet121:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet98
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet120
+    - match: "{{emoji}}|."
+      set: tweet119
   tweet120:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet97
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet119
+    - match: "{{emoji}}|."
+      set: tweet118
   tweet119:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet96
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet118
+    - match: "{{emoji}}|."
+      set: tweet117
   tweet118:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet95
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet117
+    - match: "{{emoji}}|."
+      set: tweet116
   tweet117:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet94
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet116
+    - match: "{{emoji}}|."
+      set: tweet115
   tweet116:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet93
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet115
+    - match: "{{emoji}}|."
+      set: tweet114
   tweet115:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet92
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet114
+    - match: "{{emoji}}|."
+      set: tweet113
   tweet114:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet91
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet113
+    - match: "{{emoji}}|."
+      set: tweet112
   tweet113:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet90
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet112
+    - match: "{{emoji}}|."
+      set: tweet111
   tweet112:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet89
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet111
+    - match: "{{emoji}}|."
+      set: tweet110
   tweet111:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet88
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet110
+    - match: "{{emoji}}|."
+      set: tweet109
   tweet110:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet87
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet109
+    - match: "{{emoji}}|."
+      set: tweet108
   tweet109:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet86
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet108
+    - match: "{{emoji}}|."
+      set: tweet107
   tweet108:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet85
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet107
+    - match: "{{emoji}}|."
+      set: tweet106
   tweet107:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet84
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet106
+    - match: "{{emoji}}|."
+      set: tweet105
   tweet106:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet83
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet105
+    - match: "{{emoji}}|."
+      set: tweet104
   tweet105:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet82
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet104
+    - match: "{{emoji}}|."
+      set: tweet103
   tweet104:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet81
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet103
+    - match: "{{emoji}}|."
+      set: tweet102
   tweet103:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet80
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet102
+    - match: "{{emoji}}|."
+      set: tweet101
   tweet102:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet79
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet101
+    - match: "{{emoji}}|."
+      set: tweet100
   tweet101:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet78
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet100
+    - match: "{{emoji}}|."
+      set: tweet99
   tweet100:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet77
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet99
+    - match: "{{emoji}}|."
+      set: tweet98
   tweet99:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet76
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet98
+    - match: "{{emoji}}|."
+      set: tweet97
   tweet98:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet75
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet97
+    - match: "{{emoji}}|."
+      set: tweet96
   tweet97:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet74
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet96
+    - match: "{{emoji}}|."
+      set: tweet95
   tweet96:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet73
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet95
+    - match: "{{emoji}}|."
+      set: tweet94
   tweet95:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet72
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet94
+    - match: "{{emoji}}|."
+      set: tweet93
   tweet94:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet71
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet93
+    - match: "{{emoji}}|."
+      set: tweet92
   tweet93:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet70
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet92
+    - match: "{{emoji}}|."
+      set: tweet91
   tweet92:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet69
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet91
+    - match: "{{emoji}}|."
+      set: tweet90
   tweet91:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet68
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet90
+    - match: "{{emoji}}|."
+      set: tweet89
   tweet90:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet67
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet89
+    - match: "{{emoji}}|."
+      set: tweet88
   tweet89:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet66
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet88
+    - match: "{{emoji}}|."
+      set: tweet87
   tweet88:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet65
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet87
+    - match: "{{emoji}}|."
+      set: tweet86
   tweet87:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet64
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet86
+    - match: "{{emoji}}|."
+      set: tweet85
   tweet86:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet63
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet85
+    - match: "{{emoji}}|."
+      set: tweet84
   tweet85:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet62
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet84
+    - match: "{{emoji}}|."
+      set: tweet83
   tweet84:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet61
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet83
+    - match: "{{emoji}}|."
+      set: tweet82
   tweet83:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet60
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet82
+    - match: "{{emoji}}|."
+      set: tweet81
   tweet82:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet59
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet81
+    - match: "{{emoji}}|."
+      set: tweet80
   tweet81:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet58
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet80
+    - match: "{{emoji}}|."
+      set: tweet79
   tweet80:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet57
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet79
+    - match: "{{emoji}}|."
+      set: tweet78
   tweet79:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet56
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet78
+    - match: "{{emoji}}|."
+      set: tweet77
   tweet78:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet55
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet77
+    - match: "{{emoji}}|."
+      set: tweet76
   tweet77:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet54
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet76
+    - match: "{{emoji}}|."
+      set: tweet75
   tweet76:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet53
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet75
+    - match: "{{emoji}}|."
+      set: tweet74
   tweet75:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet52
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet74
+    - match: "{{emoji}}|."
+      set: tweet73
   tweet74:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet51
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet73
+    - match: "{{emoji}}|."
+      set: tweet72
   tweet73:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet50
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet72
+    - match: "{{emoji}}|."
+      set: tweet71
   tweet72:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet49
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet71
+    - match: "{{emoji}}|."
+      set: tweet70
   tweet71:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet48
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet70
+    - match: "{{emoji}}|."
+      set: tweet69
   tweet70:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet47
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet69
+    - match: "{{emoji}}|."
+      set: tweet68
   tweet69:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet46
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet68
+    - match: "{{emoji}}|."
+      set: tweet67
   tweet68:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet45
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet67
+    - match: "{{emoji}}|."
+      set: tweet66
   tweet67:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet44
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet66
+    - match: "{{emoji}}|."
+      set: tweet65
   tweet66:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet43
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet65
+    - match: "{{emoji}}|."
+      set: tweet64
   tweet65:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet42
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet64
+    - match: "{{emoji}}|."
+      set: tweet63
   tweet64:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet41
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet63
+    - match: "{{emoji}}|."
+      set: tweet62
   tweet63:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet40
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet62
+    - match: "{{emoji}}|."
+      set: tweet61
   tweet62:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet39
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet61
+    - match: "{{emoji}}|."
+      set: tweet60
   tweet61:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet38
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet60
+    - match: "{{emoji}}|."
+      set: tweet59
   tweet60:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet37
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet59
+    - match: "{{emoji}}|."
+      set: tweet58
   tweet59:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet36
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet58
+    - match: "{{emoji}}|."
+      set: tweet57
   tweet58:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet35
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet57
+    - match: "{{emoji}}|."
+      set: tweet56
   tweet57:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet34
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet56
+    - match: "{{emoji}}|."
+      set: tweet55
   tweet56:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet33
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet55
+    - match: "{{emoji}}|."
+      set: tweet54
   tweet55:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet32
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet54
+    - match: "{{emoji}}|."
+      set: tweet53
   tweet54:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet31
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet53
+    - match: "{{emoji}}|."
+      set: tweet52
   tweet53:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet30
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet52
+    - match: "{{emoji}}|."
+      set: tweet51
   tweet52:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet29
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet51
+    - match: "{{emoji}}|."
+      set: tweet50
   tweet51:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet28
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet50
+    - match: "{{emoji}}|."
+      set: tweet49
   tweet50:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet27
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet49
+    - match: "{{emoji}}|."
+      set: tweet48
   tweet49:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet26
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet48
+    - match: "{{emoji}}|."
+      set: tweet47
   tweet48:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet25
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet47
+    - match: "{{emoji}}|."
+      set: tweet46
   tweet47:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet24
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet46
+    - match: "{{emoji}}|."
+      set: tweet45
   tweet46:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet23
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet45
+    - match: "{{emoji}}|."
+      set: tweet44
   tweet45:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet22
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet44
+    - match: "{{emoji}}|."
+      set: tweet43
   tweet44:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet21
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet43
+    - match: "{{emoji}}|."
+      set: tweet42
   tweet43:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet20
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet42
+    - match: "{{emoji}}|."
+      set: tweet41
   tweet42:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet19
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet41
+    - match: "{{emoji}}|."
+      set: tweet40
   tweet41:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet18
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet40
+    - match: "{{emoji}}|."
+      set: tweet39
   tweet40:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet17
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet39
+    - match: "{{emoji}}|."
+      set: tweet38
   tweet39:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet16
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet38
+    - match: "{{emoji}}|."
+      set: tweet37
   tweet38:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet15
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet37
+    - match: "{{emoji}}|."
+      set: tweet36
   tweet37:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet14
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet36
+    - match: "{{emoji}}|."
+      set: tweet35
   tweet36:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet13
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet35
+    - match: "{{emoji}}|."
+      set: tweet34
   tweet35:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet12
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet34
+    - match: "{{emoji}}|."
+      set: tweet33
   tweet34:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet11
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet33
+    - match: "{{emoji}}|."
+      set: tweet32
   tweet33:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet10
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet32
+    - match: "{{emoji}}|."
+      set: tweet31
   tweet32:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet9
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet31
+    - match: "{{emoji}}|."
+      set: tweet30
   tweet31:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet8
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet30
+    - match: "{{emoji}}|."
+      set: tweet29
   tweet30:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet7
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet29
+    - match: "{{emoji}}|."
+      set: tweet28
   tweet29:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet6
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet28
+    - match: "{{emoji}}|."
+      set: tweet27
   tweet28:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet5
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet27
+    - match: "{{emoji}}|."
+      set: tweet26
   tweet27:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet4
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet26
+    - match: "{{emoji}}|."
+      set: tweet25
   tweet26:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet3
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet25
+    - match: "{{emoji}}|."
+      set: tweet24
   tweet25:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet2
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet24
+    - match: "{{emoji}}|."
+      set: tweet23
   tweet24:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet1
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet23
+    - match: "{{emoji}}|."
+      set: tweet22
   tweet23:
     - match: "{{url}}"
       scope: string.quoted
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet22
+    - match: "{{emoji}}|."
+      set: tweet21
   tweet22:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet21
+    - match: "{{emoji}}|."
+      set: tweet20
   tweet21:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet20
+    - match: "{{emoji}}|."
+      set: tweet19
   tweet20:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet19
+    - match: "{{emoji}}|."
+      set: tweet18
   tweet19:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet18
+    - match: "{{emoji}}|."
+      set: tweet17
   tweet18:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet17
+    - match: "{{emoji}}|."
+      set: tweet16
   tweet17:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet16
+    - match: "{{emoji}}|."
+      set: tweet15
   tweet16:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet15
+    - match: "{{emoji}}|."
+      set: tweet14
   tweet15:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet14
+    - match: "{{emoji}}|."
+      set: tweet13
   tweet14:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet13
+    - match: "{{emoji}}|."
+      set: tweet12
   tweet13:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet12
+    - match: "{{emoji}}|."
+      set: tweet11
   tweet12:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet11
+    - match: "{{emoji}}|."
+      set: tweet10
   tweet11:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet10
+    - match: "{{emoji}}|."
+      set: tweet9
   tweet10:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet9
+    - match: "{{emoji}}|."
+      set: tweet8
   tweet9:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet8
+    - match: "{{emoji}}|."
+      set: tweet7
   tweet8:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet7
+    - match: "{{emoji}}|."
+      set: tweet6
   tweet7:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet6
+    - match: "{{emoji}}|."
+      set: tweet5
   tweet6:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet5
+    - match: "{{emoji}}|."
+      set: tweet4
   tweet5:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet4
+    - match: "{{emoji}}|."
+      set: tweet3
   tweet4:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet3
+    - match: "{{emoji}}|."
+      set: tweet2
   tweet3:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet2
+    - match: "{{emoji}}|."
+      set: tweet1
   tweet2:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
       set: tweet1
+    - match: "{{emoji}}|."
+      set: tweet0
   tweet1:
     - match: "{{url}}"
       scope: invalid.illegal
       set: tweet0
-    - match: '.|\n'
+    - match: "{{singlechar}}|\n"
+      set: tweet0
+    - match: "{{emoji}}|."
+      scope: invalid.illegal
       set: tweet0

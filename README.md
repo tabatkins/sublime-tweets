@@ -1,12 +1,19 @@
 # Sublime tweets
 
 This repository contains a simple syntax-highlighting file
-to help you compose tweets offline,
-in a real text editor,
+to help you compose tweets offline
+in a real text editor
+(specifically, Sublime Text 3),
 then post them later in the actual Twitter interface.
 
+It automatically counts characters for you,
+including Twitter oddities like URLs and emoji,
+and highlights when you go over the 280char limit,
+just like in the Twitter interface.
+
 ## Installing
-To use,
+
+To install,
 just save the `Tweets.sublime-syntax` file
 into your Sublime Text packages;
 by default,
@@ -37,14 +44,11 @@ letting you compose a tweetstorm all at once.
 
 ## Caveats
 
-This does not currently implement fully-correct Tweet character counting;
-in particular, if you use emoji or CJK characters,
-they'll be counted as a single character,
-but Twitter will count them against your length as double,
-so you won't actually have as much length as the highlight indicates.
+This *should* correctly match Twitter character counting,
+including URLs, emoji, and CJK/etc characters.
 
-It **does** implement the url-matching that Twitter uses, however,
-so those'll be counted correctly against your total length.
-
-Patches welcome,
-if I don't get to it myself!
+I know that I didn't quite copy the current URL regex
+for some strange corner cases,
+like putting directional-override chars in,
+but that shouldn't matter for virtually any real-world usage.
+Regardless, I'll probably fix that properly at some point.
