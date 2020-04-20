@@ -1,0 +1,864 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - tweet
+  - tweets
+scope: tweet.text
+
+contexts:
+  prototype:
+    - match: '^\s*-{4,}\s*$'
+      pop: true
+      scope: comment.line
+
+  main:
+    # The main context is the initial starting point of our syntax.
+    # Include other contexts from here (or specify them directly).
+    - include: tweet280
+
+  tweet280:
+    - match: '.|\n'
+      set: tweet279
+  tweet279:
+    - match: '.|\n'
+      set: tweet278
+  tweet278:
+    - match: '.|\n'
+      set: tweet277
+  tweet277:
+    - match: '.|\n'
+      set: tweet276
+  tweet276:
+    - match: '.|\n'
+      set: tweet275
+  tweet275:
+    - match: '.|\n'
+      set: tweet274
+  tweet274:
+    - match: '.|\n'
+      set: tweet273
+  tweet273:
+    - match: '.|\n'
+      set: tweet272
+  tweet272:
+    - match: '.|\n'
+      set: tweet271
+  tweet271:
+    - match: '.|\n'
+      set: tweet270
+  tweet270:
+    - match: '.|\n'
+      set: tweet269
+  tweet269:
+    - match: '.|\n'
+      set: tweet268
+  tweet268:
+    - match: '.|\n'
+      set: tweet267
+  tweet267:
+    - match: '.|\n'
+      set: tweet266
+  tweet266:
+    - match: '.|\n'
+      set: tweet265
+  tweet265:
+    - match: '.|\n'
+      set: tweet264
+  tweet264:
+    - match: '.|\n'
+      set: tweet263
+  tweet263:
+    - match: '.|\n'
+      set: tweet262
+  tweet262:
+    - match: '.|\n'
+      set: tweet261
+  tweet261:
+    - match: '.|\n'
+      set: tweet260
+  tweet260:
+    - match: '.|\n'
+      set: tweet259
+  tweet259:
+    - match: '.|\n'
+      set: tweet258
+  tweet258:
+    - match: '.|\n'
+      set: tweet257
+  tweet257:
+    - match: '.|\n'
+      set: tweet256
+  tweet256:
+    - match: '.|\n'
+      set: tweet255
+  tweet255:
+    - match: '.|\n'
+      set: tweet254
+  tweet254:
+    - match: '.|\n'
+      set: tweet253
+  tweet253:
+    - match: '.|\n'
+      set: tweet252
+  tweet252:
+    - match: '.|\n'
+      set: tweet251
+  tweet251:
+    - match: '.|\n'
+      set: tweet250
+  tweet250:
+    - match: '.|\n'
+      set: tweet249
+  tweet249:
+    - match: '.|\n'
+      set: tweet248
+  tweet248:
+    - match: '.|\n'
+      set: tweet247
+  tweet247:
+    - match: '.|\n'
+      set: tweet246
+  tweet246:
+    - match: '.|\n'
+      set: tweet245
+  tweet245:
+    - match: '.|\n'
+      set: tweet244
+  tweet244:
+    - match: '.|\n'
+      set: tweet243
+  tweet243:
+    - match: '.|\n'
+      set: tweet242
+  tweet242:
+    - match: '.|\n'
+      set: tweet241
+  tweet241:
+    - match: '.|\n'
+      set: tweet240
+  tweet240:
+    - match: '.|\n'
+      set: tweet239
+  tweet239:
+    - match: '.|\n'
+      set: tweet238
+  tweet238:
+    - match: '.|\n'
+      set: tweet237
+  tweet237:
+    - match: '.|\n'
+      set: tweet236
+  tweet236:
+    - match: '.|\n'
+      set: tweet235
+  tweet235:
+    - match: '.|\n'
+      set: tweet234
+  tweet234:
+    - match: '.|\n'
+      set: tweet233
+  tweet233:
+    - match: '.|\n'
+      set: tweet232
+  tweet232:
+    - match: '.|\n'
+      set: tweet231
+  tweet231:
+    - match: '.|\n'
+      set: tweet230
+  tweet230:
+    - match: '.|\n'
+      set: tweet229
+  tweet229:
+    - match: '.|\n'
+      set: tweet228
+  tweet228:
+    - match: '.|\n'
+      set: tweet227
+  tweet227:
+    - match: '.|\n'
+      set: tweet226
+  tweet226:
+    - match: '.|\n'
+      set: tweet225
+  tweet225:
+    - match: '.|\n'
+      set: tweet224
+  tweet224:
+    - match: '.|\n'
+      set: tweet223
+  tweet223:
+    - match: '.|\n'
+      set: tweet222
+  tweet222:
+    - match: '.|\n'
+      set: tweet221
+  tweet221:
+    - match: '.|\n'
+      set: tweet220
+  tweet220:
+    - match: '.|\n'
+      set: tweet219
+  tweet219:
+    - match: '.|\n'
+      set: tweet218
+  tweet218:
+    - match: '.|\n'
+      set: tweet217
+  tweet217:
+    - match: '.|\n'
+      set: tweet216
+  tweet216:
+    - match: '.|\n'
+      set: tweet215
+  tweet215:
+    - match: '.|\n'
+      set: tweet214
+  tweet214:
+    - match: '.|\n'
+      set: tweet213
+  tweet213:
+    - match: '.|\n'
+      set: tweet212
+  tweet212:
+    - match: '.|\n'
+      set: tweet211
+  tweet211:
+    - match: '.|\n'
+      set: tweet210
+  tweet210:
+    - match: '.|\n'
+      set: tweet209
+  tweet209:
+    - match: '.|\n'
+      set: tweet208
+  tweet208:
+    - match: '.|\n'
+      set: tweet207
+  tweet207:
+    - match: '.|\n'
+      set: tweet206
+  tweet206:
+    - match: '.|\n'
+      set: tweet205
+  tweet205:
+    - match: '.|\n'
+      set: tweet204
+  tweet204:
+    - match: '.|\n'
+      set: tweet203
+  tweet203:
+    - match: '.|\n'
+      set: tweet202
+  tweet202:
+    - match: '.|\n'
+      set: tweet201
+  tweet201:
+    - match: '.|\n'
+      set: tweet200
+  tweet200:
+    - match: '.|\n'
+      set: tweet199
+  tweet199:
+    - match: '.|\n'
+      set: tweet198
+  tweet198:
+    - match: '.|\n'
+      set: tweet197
+  tweet197:
+    - match: '.|\n'
+      set: tweet196
+  tweet196:
+    - match: '.|\n'
+      set: tweet195
+  tweet195:
+    - match: '.|\n'
+      set: tweet194
+  tweet194:
+    - match: '.|\n'
+      set: tweet193
+  tweet193:
+    - match: '.|\n'
+      set: tweet192
+  tweet192:
+    - match: '.|\n'
+      set: tweet191
+  tweet191:
+    - match: '.|\n'
+      set: tweet190
+  tweet190:
+    - match: '.|\n'
+      set: tweet189
+  tweet189:
+    - match: '.|\n'
+      set: tweet188
+  tweet188:
+    - match: '.|\n'
+      set: tweet187
+  tweet187:
+    - match: '.|\n'
+      set: tweet186
+  tweet186:
+    - match: '.|\n'
+      set: tweet185
+  tweet185:
+    - match: '.|\n'
+      set: tweet184
+  tweet184:
+    - match: '.|\n'
+      set: tweet183
+  tweet183:
+    - match: '.|\n'
+      set: tweet182
+  tweet182:
+    - match: '.|\n'
+      set: tweet181
+  tweet181:
+    - match: '.|\n'
+      set: tweet180
+  tweet180:
+    - match: '.|\n'
+      set: tweet179
+  tweet179:
+    - match: '.|\n'
+      set: tweet178
+  tweet178:
+    - match: '.|\n'
+      set: tweet177
+  tweet177:
+    - match: '.|\n'
+      set: tweet176
+  tweet176:
+    - match: '.|\n'
+      set: tweet175
+  tweet175:
+    - match: '.|\n'
+      set: tweet174
+  tweet174:
+    - match: '.|\n'
+      set: tweet173
+  tweet173:
+    - match: '.|\n'
+      set: tweet172
+  tweet172:
+    - match: '.|\n'
+      set: tweet171
+  tweet171:
+    - match: '.|\n'
+      set: tweet170
+  tweet170:
+    - match: '.|\n'
+      set: tweet169
+  tweet169:
+    - match: '.|\n'
+      set: tweet168
+  tweet168:
+    - match: '.|\n'
+      set: tweet167
+  tweet167:
+    - match: '.|\n'
+      set: tweet166
+  tweet166:
+    - match: '.|\n'
+      set: tweet165
+  tweet165:
+    - match: '.|\n'
+      set: tweet164
+  tweet164:
+    - match: '.|\n'
+      set: tweet163
+  tweet163:
+    - match: '.|\n'
+      set: tweet162
+  tweet162:
+    - match: '.|\n'
+      set: tweet161
+  tweet161:
+    - match: '.|\n'
+      set: tweet160
+  tweet160:
+    - match: '.|\n'
+      set: tweet159
+  tweet159:
+    - match: '.|\n'
+      set: tweet158
+  tweet158:
+    - match: '.|\n'
+      set: tweet157
+  tweet157:
+    - match: '.|\n'
+      set: tweet156
+  tweet156:
+    - match: '.|\n'
+      set: tweet155
+  tweet155:
+    - match: '.|\n'
+      set: tweet154
+  tweet154:
+    - match: '.|\n'
+      set: tweet153
+  tweet153:
+    - match: '.|\n'
+      set: tweet152
+  tweet152:
+    - match: '.|\n'
+      set: tweet151
+  tweet151:
+    - match: '.|\n'
+      set: tweet150
+  tweet150:
+    - match: '.|\n'
+      set: tweet149
+  tweet149:
+    - match: '.|\n'
+      set: tweet148
+  tweet148:
+    - match: '.|\n'
+      set: tweet147
+  tweet147:
+    - match: '.|\n'
+      set: tweet146
+  tweet146:
+    - match: '.|\n'
+      set: tweet145
+  tweet145:
+    - match: '.|\n'
+      set: tweet144
+  tweet144:
+    - match: '.|\n'
+      set: tweet143
+  tweet143:
+    - match: '.|\n'
+      set: tweet142
+  tweet142:
+    - match: '.|\n'
+      set: tweet141
+  tweet141:
+    - match: '.|\n'
+      set: tweet140
+  tweet140:
+    - match: '.|\n'
+      set: tweet139
+  tweet139:
+    - match: '.|\n'
+      set: tweet138
+  tweet138:
+    - match: '.|\n'
+      set: tweet137
+  tweet137:
+    - match: '.|\n'
+      set: tweet136
+  tweet136:
+    - match: '.|\n'
+      set: tweet135
+  tweet135:
+    - match: '.|\n'
+      set: tweet134
+  tweet134:
+    - match: '.|\n'
+      set: tweet133
+  tweet133:
+    - match: '.|\n'
+      set: tweet132
+  tweet132:
+    - match: '.|\n'
+      set: tweet131
+  tweet131:
+    - match: '.|\n'
+      set: tweet130
+  tweet130:
+    - match: '.|\n'
+      set: tweet129
+  tweet129:
+    - match: '.|\n'
+      set: tweet128
+  tweet128:
+    - match: '.|\n'
+      set: tweet127
+  tweet127:
+    - match: '.|\n'
+      set: tweet126
+  tweet126:
+    - match: '.|\n'
+      set: tweet125
+  tweet125:
+    - match: '.|\n'
+      set: tweet124
+  tweet124:
+    - match: '.|\n'
+      set: tweet123
+  tweet123:
+    - match: '.|\n'
+      set: tweet122
+  tweet122:
+    - match: '.|\n'
+      set: tweet121
+  tweet121:
+    - match: '.|\n'
+      set: tweet120
+  tweet120:
+    - match: '.|\n'
+      set: tweet119
+  tweet119:
+    - match: '.|\n'
+      set: tweet118
+  tweet118:
+    - match: '.|\n'
+      set: tweet117
+  tweet117:
+    - match: '.|\n'
+      set: tweet116
+  tweet116:
+    - match: '.|\n'
+      set: tweet115
+  tweet115:
+    - match: '.|\n'
+      set: tweet114
+  tweet114:
+    - match: '.|\n'
+      set: tweet113
+  tweet113:
+    - match: '.|\n'
+      set: tweet112
+  tweet112:
+    - match: '.|\n'
+      set: tweet111
+  tweet111:
+    - match: '.|\n'
+      set: tweet110
+  tweet110:
+    - match: '.|\n'
+      set: tweet109
+  tweet109:
+    - match: '.|\n'
+      set: tweet108
+  tweet108:
+    - match: '.|\n'
+      set: tweet107
+  tweet107:
+    - match: '.|\n'
+      set: tweet106
+  tweet106:
+    - match: '.|\n'
+      set: tweet105
+  tweet105:
+    - match: '.|\n'
+      set: tweet104
+  tweet104:
+    - match: '.|\n'
+      set: tweet103
+  tweet103:
+    - match: '.|\n'
+      set: tweet102
+  tweet102:
+    - match: '.|\n'
+      set: tweet101
+  tweet101:
+    - match: '.|\n'
+      set: tweet100
+  tweet100:
+    - match: '.|\n'
+      set: tweet99
+  tweet99:
+    - match: '.|\n'
+      set: tweet98
+  tweet98:
+    - match: '.|\n'
+      set: tweet97
+  tweet97:
+    - match: '.|\n'
+      set: tweet96
+  tweet96:
+    - match: '.|\n'
+      set: tweet95
+  tweet95:
+    - match: '.|\n'
+      set: tweet94
+  tweet94:
+    - match: '.|\n'
+      set: tweet93
+  tweet93:
+    - match: '.|\n'
+      set: tweet92
+  tweet92:
+    - match: '.|\n'
+      set: tweet91
+  tweet91:
+    - match: '.|\n'
+      set: tweet90
+  tweet90:
+    - match: '.|\n'
+      set: tweet89
+  tweet89:
+    - match: '.|\n'
+      set: tweet88
+  tweet88:
+    - match: '.|\n'
+      set: tweet87
+  tweet87:
+    - match: '.|\n'
+      set: tweet86
+  tweet86:
+    - match: '.|\n'
+      set: tweet85
+  tweet85:
+    - match: '.|\n'
+      set: tweet84
+  tweet84:
+    - match: '.|\n'
+      set: tweet83
+  tweet83:
+    - match: '.|\n'
+      set: tweet82
+  tweet82:
+    - match: '.|\n'
+      set: tweet81
+  tweet81:
+    - match: '.|\n'
+      set: tweet80
+  tweet80:
+    - match: '.|\n'
+      set: tweet79
+  tweet79:
+    - match: '.|\n'
+      set: tweet78
+  tweet78:
+    - match: '.|\n'
+      set: tweet77
+  tweet77:
+    - match: '.|\n'
+      set: tweet76
+  tweet76:
+    - match: '.|\n'
+      set: tweet75
+  tweet75:
+    - match: '.|\n'
+      set: tweet74
+  tweet74:
+    - match: '.|\n'
+      set: tweet73
+  tweet73:
+    - match: '.|\n'
+      set: tweet72
+  tweet72:
+    - match: '.|\n'
+      set: tweet71
+  tweet71:
+    - match: '.|\n'
+      set: tweet70
+  tweet70:
+    - match: '.|\n'
+      set: tweet69
+  tweet69:
+    - match: '.|\n'
+      set: tweet68
+  tweet68:
+    - match: '.|\n'
+      set: tweet67
+  tweet67:
+    - match: '.|\n'
+      set: tweet66
+  tweet66:
+    - match: '.|\n'
+      set: tweet65
+  tweet65:
+    - match: '.|\n'
+      set: tweet64
+  tweet64:
+    - match: '.|\n'
+      set: tweet63
+  tweet63:
+    - match: '.|\n'
+      set: tweet62
+  tweet62:
+    - match: '.|\n'
+      set: tweet61
+  tweet61:
+    - match: '.|\n'
+      set: tweet60
+  tweet60:
+    - match: '.|\n'
+      set: tweet59
+  tweet59:
+    - match: '.|\n'
+      set: tweet58
+  tweet58:
+    - match: '.|\n'
+      set: tweet57
+  tweet57:
+    - match: '.|\n'
+      set: tweet56
+  tweet56:
+    - match: '.|\n'
+      set: tweet55
+  tweet55:
+    - match: '.|\n'
+      set: tweet54
+  tweet54:
+    - match: '.|\n'
+      set: tweet53
+  tweet53:
+    - match: '.|\n'
+      set: tweet52
+  tweet52:
+    - match: '.|\n'
+      set: tweet51
+  tweet51:
+    - match: '.|\n'
+      set: tweet50
+  tweet50:
+    - match: '.|\n'
+      set: tweet49
+  tweet49:
+    - match: '.|\n'
+      set: tweet48
+  tweet48:
+    - match: '.|\n'
+      set: tweet47
+  tweet47:
+    - match: '.|\n'
+      set: tweet46
+  tweet46:
+    - match: '.|\n'
+      set: tweet45
+  tweet45:
+    - match: '.|\n'
+      set: tweet44
+  tweet44:
+    - match: '.|\n'
+      set: tweet43
+  tweet43:
+    - match: '.|\n'
+      set: tweet42
+  tweet42:
+    - match: '.|\n'
+      set: tweet41
+  tweet41:
+    - match: '.|\n'
+      set: tweet40
+  tweet40:
+    - match: '.|\n'
+      set: tweet39
+  tweet39:
+    - match: '.|\n'
+      set: tweet38
+  tweet38:
+    - match: '.|\n'
+      set: tweet37
+  tweet37:
+    - match: '.|\n'
+      set: tweet36
+  tweet36:
+    - match: '.|\n'
+      set: tweet35
+  tweet35:
+    - match: '.|\n'
+      set: tweet34
+  tweet34:
+    - match: '.|\n'
+      set: tweet33
+  tweet33:
+    - match: '.|\n'
+      set: tweet32
+  tweet32:
+    - match: '.|\n'
+      set: tweet31
+  tweet31:
+    - match: '.|\n'
+      set: tweet30
+  tweet30:
+    - match: '.|\n'
+      set: tweet29
+  tweet29:
+    - match: '.|\n'
+      set: tweet28
+  tweet28:
+    - match: '.|\n'
+      set: tweet27
+  tweet27:
+    - match: '.|\n'
+      set: tweet26
+  tweet26:
+    - match: '.|\n'
+      set: tweet25
+  tweet25:
+    - match: '.|\n'
+      set: tweet24
+  tweet24:
+    - match: '.|\n'
+      set: tweet23
+  tweet23:
+    - match: '.|\n'
+      set: tweet22
+  tweet22:
+    - match: '.|\n'
+      set: tweet21
+  tweet21:
+    - match: '.|\n'
+      set: tweet20
+  tweet20:
+    - match: '.|\n'
+      set: tweet19
+  tweet19:
+    - match: '.|\n'
+      set: tweet18
+  tweet18:
+    - match: '.|\n'
+      set: tweet17
+  tweet17:
+    - match: '.|\n'
+      set: tweet16
+  tweet16:
+    - match: '.|\n'
+      set: tweet15
+  tweet15:
+    - match: '.|\n'
+      set: tweet14
+  tweet14:
+    - match: '.|\n'
+      set: tweet13
+  tweet13:
+    - match: '.|\n'
+      set: tweet12
+  tweet12:
+    - match: '.|\n'
+      set: tweet11
+  tweet11:
+    - match: '.|\n'
+      set: tweet10
+  tweet10:
+    - match: '.|\n'
+      set: tweet9
+  tweet9:
+    - match: '.|\n'
+      set: tweet8
+  tweet8:
+    - match: '.|\n'
+      set: tweet7
+  tweet7:
+    - match: '.|\n'
+      set: tweet6
+  tweet6:
+    - match: '.|\n'
+      set: tweet5
+  tweet5:
+    - match: '.|\n'
+      set: tweet4
+  tweet4:
+    - match: '.|\n'
+      set: tweet3
+  tweet3:
+    - match: '.|\n'
+      set: tweet2
+  tweet2:
+    - match: '.|\n'
+      set: tweet1
+  tweet1:
+    - match: '.|\n'
+      set: tweet0
+  tweet0:
+    - match: '\n'
+    - match: '.|\n'
+      scope: invalid.illegal
+
