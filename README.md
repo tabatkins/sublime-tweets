@@ -38,15 +38,13 @@ letting you compose a tweetstorm all at once.
 ## Caveats
 
 This does not currently implement fully-correct Tweet character counting;
-in particular, if you use CJK characters,
+in particular, if you use emoji or CJK characters,
 they'll be counted as a single character,
 but Twitter will count them against your length as double,
 so you won't actually have as much length as the highlight indicates.
 
-It also doesn't currently implement the url-matching that Twitter does,
-where a URL of any length is matched and counted as a fixed amount of characters.
+It **does** implement the url-matching that Twitter uses, however,
+so those'll be counted correctly against your total length.
 
-Both of these are doable,
-they're just not done right now.
 Patches welcome,
 if I don't get to it myself!
